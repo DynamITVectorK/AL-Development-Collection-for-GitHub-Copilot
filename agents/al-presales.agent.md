@@ -679,8 +679,16 @@ create an architectural design considering:
 - Integration points: [identified]
 - Risk factors: [from 03-swot-analysis.md]
 
-Create .github/plans/[project]-architecture.md"
+Create .github/plans/{req_name}.architecture.md"
 ```
+
+### Update Global Memory
+
+After completing the presales analysis, **ALWAYS** append a summary to `.github/plans/memory.md` (append-only, never delete existing content):
+- Project name and feasibility recommendation (GO/CAUTION/NO-GO)
+- Key risks identified
+- Estimated effort and cost range
+- Handoff recommendation (which agent/workflow next)
 
 ### Invoke al-spec.create
 
@@ -693,8 +701,15 @@ Parameters:
 - FeatureName: [project-name from intake]
 - Scope: [defined scope from Phase 1]
 
-Output: .github/specs/[project-name].spec.md
+Output: .github/plans/{req_name}.spec.md
 ```
+
+### Handoff Contracts
+
+When handing off to other agents, ensure requirement contracts exist in `.github/plans/`:
+- `{req_name}.architecture.md` → Created by @al-architect (COPY from `docs/templates/architecture-template.md`)
+- `{req_name}.spec.md` → Created by al-spec.create (COPY from `docs/templates/spec-template.md`)
+- `{req_name}.test-plan.md` → Created during implementation planning
 
 ---
 
@@ -810,6 +825,13 @@ await createFile('Technical_PreSales/customer-loyalty-system/00-executive-summar
 
 // 3. Continue with analysis and create remaining docs as needed
 ```
+
+---
+
+## Domain Skills
+
+When performing project estimation (complexity scoring, PERT, SWOT, cost breakdown), load and follow:
+- @file skills/skill-estimation.md
 
 ---
 

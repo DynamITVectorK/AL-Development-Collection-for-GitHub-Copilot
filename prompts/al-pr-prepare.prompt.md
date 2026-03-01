@@ -330,7 +330,8 @@ Create `/reports/pr-draft.md` with this structure:
 
 **For final validation:**
 ```
-Switch to al-tester mode
+@al-conductor   # TDD orchestration with review subagent
+@al-developer   # Direct testing and fixes
 ```
 
 ---

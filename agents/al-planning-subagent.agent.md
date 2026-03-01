@@ -1,6 +1,7 @@
 ---
 name: AL Planning Subagent
 description: 'AL Planning Subagent - AL-aware research and context gathering for Business Central development. Returns structured findings to Conductor for plan creation.'
+user-invocable: false
 argument-hint: 'Research goal or problem statement for AL development'
 tools: ['read/problems', 'read/readFile', 'agent', 'edit', 'search', 'web', 'microsoft-docs/*', 'memory', 'todo']
 model: Claude Sonnet 4.5
@@ -381,18 +382,17 @@ Before starting your research, **ALWAYS check for existing context** in `.github
 
 ```
 Checking for context:
-1. .github/plans/project-context.md → Project overview, AL structure
-2. .github/plans/session-memory.md → Recent work, decisions, patterns
-3. .github/plans/*-arch.md → Architectural designs (from AL Architecture & Design Specialist)
-4. .github/plans/*-spec.md → Technical specifications
-5. .github/plans/*-diagnosis.md → Recent debugging findings
+1. .github/plans/memory.md → Global memory (decisions, context, cross-session state — append-only)
+2. .github/plans/*.architecture.md → Architectural designs (from @al-architect)
+3. .github/plans/*.spec.md → Technical specifications
+4. .github/plans/*.test-plan.md → Test strategies
 ```
 
 **Why this matters**:
+- **Global memory** provides decisions, context, and patterns across sessions
 - **Architecture files** provide strategic decisions you should align with
-- **Session memory** shows what was recently worked on (context continuity)
 - **Specifications** define object IDs and structure already decided
-- **Diagnosis files** reveal recent bugs/issues to avoid
+- **Test plans** inform testing approach
 
 **If files exist**:
 - ✅ Read them before conducting research
@@ -411,13 +411,13 @@ Checking for context:
 **Your research may be used by**:
 - **AL Development Conductor** → Creates implementation plan from your findings
 - **AL Architecture & Design Specialist** → May reference your research for design decisions
-- **AL Implementation Subagent** → Uses your findings during implementation
+- **@al-developer** → Uses your findings during implementation
 - **AL Code Review Subagent** → Validates against patterns you identified
 
 **Integration Pattern:**
 ```markdown
-1. AL Development Conductor delegates research task → You receive objective
-2. Check .github/plans/ for existing context → Read arch.md, spec.md, memory.md
+1. @al-conductor delegates research task → You receive objective
+2. Check .github/plans/ for existing context → Read *.architecture.md, *.spec.md, memory.md
 3. Conduct AL-specific research → Objects, events, structure
 4. Stop at 90% confidence → Don't over-research
 5. Return structured findings → Conductor creates plan

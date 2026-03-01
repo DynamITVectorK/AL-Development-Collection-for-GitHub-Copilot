@@ -374,19 +374,18 @@ Once your environment is initialized:
 
 **For Development:**
 ```
-@workspace use al-pages      # Design UI
-@workspace use al-events     # Implement events
-@workspace use al-build      # Build and deploy
+@al-developer                    # Implement features (loads page/event skills on demand)
+@workspace use al-build          # Build and deploy
 ```
 
 **For Architecture:**
 ```
-Switch to al-architect mode
+@al-architect                    # Design solutions
 ```
 
-**For Understanding the Collection:**
+**For TDD Orchestration:**
 ```
-Switch to al-architect mode
+@al-conductor                    # Plan → Implement → Review → Commit
 ```
 
 ## Security Considerations

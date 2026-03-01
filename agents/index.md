@@ -1,58 +1,41 @@
-# Agents - Role-Based Specialists
+# Agents - ALDC Core v1.1
 
-**Role-based strategic consultants** implemented as `.agent.md` files with **MCP Tool Boundaries** for specialized AL development guidance in Business Central.
+**Role-based specialists** implemented as `.agent.md` files for AL development in Business Central.
 
-## How to Use Agents
+## Public Agents (4)
 
-Activate agents explicitly for strategic consultation:
-```
-Use al-architect
-Use al-conductor
-Use al-debugger
-```
+| Agent | Purpose | Loads Skills |
+|-------|---------|--------------|
+| [@al-architect](al-architect.agent.md) | Solution architecture & design | skill-api, skill-copilot, skill-performance, skill-events, skill-testing |
+| [@al-conductor](al-conductor.agent.md) | TDD orchestration: Planning → Implementation → Review → Commit | skill-testing |
+| [@al-developer](al-developer.agent.md) | Tactical implementation with full build tools | skill-debug, skill-api, skill-copilot, skill-events, skill-permissions, skill-pages, skill-migrate, skill-translate, skill-performance |
+| [@al-presales](al-presales.agent.md) | Project estimation & pre-sales analysis | skill-estimation |
 
-## Available Agents
+## Subagents (2)
 
-### Strategic Specialists (7)
-
-| Agent | Purpose |
-|-------|---------|
-| [al-architect](al-architect.agent.md) | Solution architecture & design |
-| [al-developer](al-developer.agent.md) | Tactical implementation with full build tools |
-| [al-debugger](al-debugger.agent.md) | Deep debugging & diagnosis |
-| [al-tester](al-tester.agent.md) | Testing strategy & TDD |
-| [al-api](al-api.agent.md) | API development specialist |
-| [al-copilot](al-copilot.agent.md) | AI/Copilot feature development |
-| [al-presales](al-presales.agent.md) | Project estimation & pre-sales analysis |
-
-### Orchestra System (4)
-
-| Agent | Purpose |
-|-------|---------|
-| [al-conductor](al-conductor.agent.md) | TDD orchestration: Planning → Implementation → Review → Commit |
-| [al-planning-subagent](al-planning-subagent.agent.md) | Specification and test design |
-| [al-implement-subagent](al-implement-subagent.agent.md) | Code implementation under conductor |
-| [al-review-subagent](al-review-subagent.agent.md) | Code review and quality gates |
+| Agent | Purpose | Invoked By |
+|-------|---------|------------|
+| [al-planning-subagent](al-planning-subagent.agent.md) | AL-aware research & context gathering | @al-conductor |
+| [al-review-subagent](al-review-subagent.agent.md) | Code review and quality gates | @al-conductor |
 
 ## Agent Selection Guide
 
 | Need | Agent |
 |------|-------|
-| Design a solution | al-architect |
-| Implement a feature | al-developer (simple) or al-conductor (complex) |
-| Debug an issue | al-debugger |
-| Write tests | al-tester |
-| Build an API | al-api |
-| Add AI features | al-copilot |
-| Estimate a project | al-presales |
+| Design a solution | @al-architect |
+| Implement a feature (simple) | @al-developer |
+| Implement a feature (complex, TDD) | @al-conductor |
+| Estimate a project | @al-presales |
 
-## Learn More
+## Requirement Contracts
 
-- [Full Documentation](../docs/agents/index.md)
-- [Getting Started](../docs/getting-started.md)
-- [AL Development Collection](../docs/al-development-collection.md)
+All agents read/write to `.github/plans/`:
+- `{req_name}.spec.md` — Technical specification
+- `{req_name}.architecture.md` — Architectural design
+- `{req_name}.test-plan.md` — Test strategy
+- `memory.md` — Global memory (append-only)
 
 ---
 
-**Version**: 2.11.0  
-**Last Updated**: 2026-02-06
+**Version**: 1.1.0
+**Last Updated**: 2026-03-01

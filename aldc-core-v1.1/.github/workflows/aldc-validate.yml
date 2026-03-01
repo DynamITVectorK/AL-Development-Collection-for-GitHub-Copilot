@@ -1,0 +1,29 @@
+name: ALDC Core Validation
+on:
+  push:
+    paths:
+      - "aldc.yaml"
+      - ".github/plans/**"
+      - "agents/**"
+      - "prompts/**"
+      - "skills/**"
+      - "instructions/**"
+      - "docs/templates/**"
+  pull_request:
+    paths:
+      - "aldc.yaml"
+      - ".github/plans/**"
+      - "agents/**"
+      - "prompts/**"
+      - "skills/**"
+      - "instructions/**"
+      - "docs/templates/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/aldc-validate
+        with:
+          config: aldc.yaml
