@@ -156,6 +156,32 @@ After presenting the plan:
 
 7. **Write Plan File**: Once approved, write the plan to `.github/plans/<task-name>/<task-name>-plan.md`.
 
+8. **Create Planning Completion File**: Write `.github/plans/<task-name>/<task-name>-phase-1-complete.md` with:
+   - Planning findings summary (from al-planning-subagent)
+   - Approved plan (phases, AL objects planned, estimated effort per phase)
+   - Requirement set status: spec ✅, architecture ✅/N/A, test-plan ✅/created during planning
+   - Open questions resolved (and how)
+   - User approval timestamp
+
+   > This is MANDATORY. Phase 1 is the only phase without code review (no code yet), but it MUST have its phase-complete document like all other phases.
+
+9. **Show Planning Checkpoint**:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚦 CONDUCTOR CHECKPOINT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Phase 1/{N} complete: Planning
+📦 Deliverables:
+• Plan: {N} phases defined
+• Requirement set: spec ✅ architecture ✅ test-plan ✅
+• Phase doc: {req_name}-phase-1-complete.md ✅
+✅ Plan APPROVED — proceeding to Phase 2
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**HARD GATE — IMPLEMENTATION START**: You MUST have written the phase-1-complete.md file BEFORE showing this checkpoint. WAIT for user confirmation before invoking al-implement-subagent for Phase 2.
+
 **CRITICAL**: You DON'T implement the code yourself. You ONLY orchestrate subagents to do so.
 
 ### Phase 2: Implementation Cycle (Repeat for each phase)
