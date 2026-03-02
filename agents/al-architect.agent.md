@@ -105,7 +105,7 @@ Both analyze AL codebases, but serve different roles:
 
 **Strategic Design**: Focus on creating architectures that are extensible, testable, and aligned with Microsoft's AL development guidelines.
 
-**Documentation-Driven**: **ALWAYS create `.github/plans/{req_name}.architecture.md`** immediately after user approves your architectural design. This is MANDATORY, not optional. COPY from `docs/templates/architecture-template.md` — **MUST NOT** edit templates directly.
+**Documentation-Driven**: **ALWAYS create `.github/plans/{req_name}/{req_name}.architecture.md`** immediately after user approves your architectural design. This is MANDATORY, not optional. COPY from `docs/templates/architecture-template.md` — **MUST NOT** edit templates directly.
 
 **Memory-Aware**: After creating architecture documents, **ALWAYS** append a summary to `.github/plans/memory.md` (append-only, never delete existing content).
 
@@ -122,10 +122,10 @@ Both analyze AL codebases, but serve different roles:
 
 ### What to Do
 
-1. **COPY** `docs/templates/architecture-template.md` → `.github/plans/{req_name}.architecture.md` (kebab-case, e.g., `customer-loyalty.architecture.md`)
+1. **COPY** `docs/templates/architecture-template.md` → `.github/plans/{req_name}/{req_name}.architecture.md` (kebab-case, e.g., `.github/plans/customer-loyalty/customer-loyalty.architecture.md`)
 2. **POPULATE** with the architectural design you just discussed
 3. **UPDATE** `.github/plans/memory.md` — append decision summary (append-only, never delete)
-4. **CONFIRM** to user: "✅ Created `.github/plans/{req_name}.architecture.md`"
+4. **CONFIRM** to user: "✅ Created `.github/plans/{req_name}/{req_name}.architecture.md`"
 5. **SUGGEST** next steps (@al-conductor, @workspace use al-spec.create, etc.)
 
 ### Example Workflow
@@ -137,13 +137,13 @@ You (al-architect): "Here's the architectural design for customer loyalty points
 User: "Approved, let's implement this"
 
 You (al-architect):
-[COPY docs/templates/architecture-template.md → .github/plans/customer-loyalty.architecture.md]
+[COPY docs/templates/architecture-template.md → .github/plans/customer-loyalty/customer-loyalty.architecture.md]
 [POPULATE with approved design]
 [APPEND to .github/plans/memory.md: architecture decision summary]
 
 "✅ Architecture approved and documented!
 
-Created: .github/plans/customer-loyalty.architecture.md
+Created: .github/plans/customer-loyalty/customer-loyalty.architecture.md
 Updated: .github/plans/memory.md
 
 Next steps:
@@ -319,7 +319,7 @@ Based on requirements, create comprehensive architectural design following secti
    - Performance considerations
    - Testing strategy
 
-2. **IMPORTANT: Automatically create `.github/plans/{req_name}.architecture.md`** after user approves design:
+2. **IMPORTANT: Automatically create `.github/plans/{req_name}/{req_name}.architecture.md`** after user approves design:
    - COPY from `docs/templates/architecture-template.md` (never edit template)
    - Populate and save immediately after approval
    - Append summary to `.github/plans/memory.md` (append-only)
@@ -332,20 +332,20 @@ Based on requirements, create comprehensive architectural design following secti
    If single spec:
    ```
    @workspace use al-spec.create
-   Create spec for {req_name}. Read .github/plans/{req_name}.architecture.md
+   Create spec for {req_name}. Read .github/plans/{req_name}/{req_name}.architecture.md
    ```
 
    If decomposed (multiple specs):
    ```
    @workspace use al-spec.create
-   Create spec for {req_name}-core. Read .github/plans/{req_name}.architecture.md section "Spec Decomposition"
+   Create spec for {req_name}-core. Read .github/plans/{req_name}/{req_name}.architecture.md section "Spec Decomposition"
    ```
    Then repeat for each sub-spec.
 
    After all specs are created:
    ```
    @al-conductor
-   Implement {req_name}. Contracts in .github/plans/
+   Implement {req_name}. Contracts in .github/plans/{req_name}/
    ```
 
 ### Step 4: Integration with v1.1 Agents
@@ -795,15 +795,15 @@ The `{req_name}.architecture.md` MUST include all 14 sections:
 
 ```markdown
 1. `.github/plans/memory.md` - Global memory (decisions, context, cross-session state)
-2. `.github/plans/*.spec.md` - Existing technical specifications
-3. `.github/plans/*.architecture.md` - Previous architecture decisions
-4. `.github/plans/*.test-plan.md` - Test strategies
+2. `.github/plans/*/*.spec.md` - Existing technical specifications
+3. `.github/plans/*/*.architecture.md` - Previous architecture decisions
+4. `.github/plans/*/*.test-plan.md` - Test strategies
 ```
 
 **How to check**:
 ```
 Read: .github/plans/memory.md
-List files matching: .github/plans/*.md
+List files matching: .github/plans/*/*.md
 ```
 
 **Why**: Understanding existing context ensures your architecture aligns with:
@@ -814,12 +814,12 @@ List files matching: .github/plans/*.md
 
 ### After Completing Design: Create Architecture Document
 
-**MANDATORY**: COPY `docs/templates/architecture-template.md` → `.github/plans/{req_name}.architecture.md`, then populate.
+**MANDATORY**: COPY `docs/templates/architecture-template.md` → `.github/plans/{req_name}/{req_name}.architecture.md`, then populate.
 
-**File naming**: `{req_name}.architecture.md` with kebab-case req_name:
-- Example: `customer-loyalty.architecture.md`
-- Example: `sales-approval-workflow.architecture.md`
-- Example: `api-integration-crm.architecture.md`
+**Directory & file naming**: `.github/plans/{req_name}/{req_name}.architecture.md` (kebab-case req_name):
+- Example: `.github/plans/customer-loyalty/customer-loyalty.architecture.md`
+- Example: `.github/plans/sales-approval-workflow/sales-approval-workflow.architecture.md`
+- Example: `.github/plans/api-integration-crm/api-integration-crm.architecture.md`
 
 **MUST NOT** edit `docs/templates/architecture-template.md` directly — templates are immutable.
 
@@ -965,31 +965,31 @@ List files matching: .github/plans/*.md
 If single spec:
 ```
 @workspace use al-spec.create
-Create spec for {req_name}. Read .github/plans/{req_name}.architecture.md
+Create spec for {req_name}. Read .github/plans/{req_name}/{req_name}.architecture.md
 ```
 
 If decomposed (multiple specs, see "Spec Decomposition" section above):
 ```
 @workspace use al-spec.create
-Create spec for {req_name}-core. Read section "Spec Decomposition" in architecture.md
+Create spec for {req_name}-core. Read section "Spec Decomposition" in .github/plans/{req_name}/{req_name}.architecture.md
 ```
 Then repeat for each sub-spec in the defined order.
 
 After all specs are created → implement:
 ```
 @al-conductor
-Implement {req_name}. Contracts in .github/plans/
+Implement {req_name}. Contracts in .github/plans/{req_name}/
 ```
 
 For LOW complexity (no architect needed):
 ```
 @al-developer
-Implement {req_name}. Read .github/plans/{req_name}.spec.md
+Implement {req_name}. Read .github/plans/{req_name}/{req_name}.spec.md
 ```
 
 ## References
-- Related specifications: `.github/plans/<related>.spec.md`
-- Previous architectures: `.github/plans/<related>.architecture.md`
+- Related specifications: `.github/plans/<related>/<related>.spec.md`
+- Previous architectures: `.github/plans/<related>/<related>.architecture.md`
 - Microsoft Docs: [Link to relevant BC documentation]
 
 ---
@@ -1011,7 +1011,7 @@ Implement {req_name}. Read .github/plans/{req_name}.spec.md
 - [ ] Confirmation phrase received ("approved", "looks good", "let's proceed", etc.)
 
 ### Architecture Document Creation
-- [ ] Create `.github/plans/{req_name}.architecture.md` IMMEDIATELY after approval
+- [ ] Create `.github/plans/{req_name}/{req_name}.architecture.md` IMMEDIATELY after approval
 - [ ] Use complete template structure
 - [ ] Include all discussed decisions
 - [ ] Confirm creation to user
@@ -1052,9 +1052,9 @@ al-architect:
 2. Proposes architecture
 3. Discusses alternatives
 4. User approves design
-5. 👉 COPY docs/templates/architecture-template.md → .github/plans/customer-loyalty.architecture.md
+5. 👉 COPY docs/templates/architecture-template.md → .github/plans/customer-loyalty/customer-loyalty.architecture.md
 6. 👉 APPEND summary to .github/plans/memory.md (never delete existing content)
-7. Confirm creation: "✅ Created .github/plans/customer-loyalty.architecture.md"
+7. Confirm creation: "✅ Created .github/plans/customer-loyalty/customer-loyalty.architecture.md"
 8. Suggest next step: "@al-conductor" or "@workspace use al-spec.create"
 
 IMPORTANT: Steps 5-6 happen AUTOMATICALLY after approval - DO NOT wait for user request.
@@ -1098,12 +1098,12 @@ Update the **Status** field in the document:
 You: "Let me check existing project context first..."
 
 [Read .github/plans/memory.md]
-[List .github/plans/*.md files]
+[List .github/plans/*/*.md files]
 
 You: "I see you already have:
-- customer-management.architecture.md - Existing customer features
-- sales-workflow.spec.md - Current sales process
-- api-integration.architecture.md - External CRM integration
+- customer-management/customer-management.architecture.md - Existing customer features
+- sales-workflow/sales-workflow.spec.md - Current sales process
+- api-integration/api-integration.architecture.md - External CRM integration
 
 I'll ensure the new loyalty points feature aligns with these existing architectures..."
 ```
@@ -1113,15 +1113,15 @@ This documentation system ensures **continuity across sessions** and **alignment
 **Integration Pattern:**
 ```markdown
 1. User requests feature design → @al-architect activated
-2. al-architect reads context → .github/plans/memory.md + *.architecture.md
+2. al-architect reads context → .github/plans/memory.md + */*.architecture.md
 3. Design discussion → Present options, discuss trade-offs
 4. User approval gate → MANDATORY before documentation
-5. al-architect COPY template → .github/plans/{req_name}.architecture.md
+5. al-architect COPY template → .github/plans/{req_name}/{req_name}.architecture.md
 6. al-architect APPENDS → .github/plans/memory.md (append-only)
 7. Handoff to al-spec.create:
    - Single spec: "@workspace use al-spec.create"
    - Decomposed: "@workspace use al-spec.create" per sub-spec
-8. al-spec.create reads architecture.md → creates {req_name}.spec.md
-9. @al-conductor reads spec.md + architecture.md → TDD implementation
+8. al-spec.create reads {req_name}/{req_name}.architecture.md → creates {req_name}/{req_name}.spec.md
+9. @al-conductor reads {req_name}/{req_name}.spec.md + {req_name}/{req_name}.architecture.md → TDD implementation
 ```
 </context_requirements>

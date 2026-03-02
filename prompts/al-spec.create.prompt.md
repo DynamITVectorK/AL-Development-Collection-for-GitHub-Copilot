@@ -1,7 +1,7 @@
 ---
 agent: agent
 model: Claude Opus 4.5 (Preview) (copilot)
-description: 'Create a detailed technical specification (.spec.md) that serves as an implementable blueprint for Business Central features. Reads architecture.md if exists. Outputs to .github/plans/.'
+description: 'Create a detailed technical specification (.spec.md) that serves as an implementable blueprint for Business Central features. Reads architecture.md if exists. Outputs to .github/plans/{req_name}/.'
 tools: ['vscode', 'read', 'search', 'github/*', 'vscode/memory', 'ms-vscode.vscode-websearchforcopilot/websearch']
 ---
 
@@ -14,7 +14,7 @@ This is **NOT** the architecture phase. This phase produces the implementable bl
 ## Guardrails
 
 - **Never** create or modify real AL objects during this phase
-- **Never** output to `/specs/` — always output to `.github/plans/`
+- **Never** output to `/specs/` — always output to `.github/plans/{req_name}/`
 - If `{req_name}.architecture.md` exists, read it first — the spec must implement what the architect designed
 - If spec already exists, confirm with user before overwriting
 - Complexity drives depth: LOW = lighter spec, MEDIUM/HIGH = full spec with all sections
@@ -32,7 +32,7 @@ Extract: project app ID range, naming conventions (prefix), existing table IDs i
 ### 1.2 Read architecture document (if exists)
 
 ```
-Read .github/plans/${input:req_name}.architecture.md
+Read .github/plans/${input:req_name}/${input:req_name}.architecture.md
 ```
 
 If it exists: the spec MUST align with the architectural decisions (data flows, chosen patterns, integration points).
@@ -51,7 +51,7 @@ Search for:
 
 ## Step 2 — Generate Specification
 
-Create `.github/plans/${input:req_name}.spec.md` with the following structure:
+Create `.github/plans/${input:req_name}/${input:req_name}.spec.md` with the following structure:
 
 ---
 
@@ -365,7 +365,7 @@ page {ID} "{Prefix} {Entity} API"
 
 ## Success Criteria
 
-- ✅ Spec file created at `.github/plans/${input:req_name}.spec.md`
+- ✅ Spec file created at `.github/plans/${input:req_name}/${input:req_name}.spec.md`
 - ✅ Object IDs verified against `app.json` idRanges
 - ✅ Architecture document consulted (if exists)
 - ✅ All AL signatures are complete (no "TBD" in procedure signatures)

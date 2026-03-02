@@ -203,18 +203,21 @@ Las 9 instructions files se mantienen sin cambios. Son reglas pasivas auto-aplic
 ```
 .github/plans/
   memory.md                              ← GLOBAL (único, acumulativo)
-  {req_name}.spec.md                     ← por requerimiento
-  {req_name}.architecture.md             ← por requerimiento
-  {req_name}.test-plan.md                ← por requerimiento
+  {req_name}/                            ← un directorio por requerimiento
+    {req_name}.spec.md
+    {req_name}.architecture.md
+    {req_name}.test-plan.md
+    {req_name}-phase-<N>-complete.md     ← generado por al-conductor
+    {req_name}-complete.md               ← generado por al-conductor
   archive/                               ← requerimientos completados
 ```
 
 ### Convención de nombres
 
 - `{req_name}` **MUST** ser kebab-case (ej: `customer-discount`, `api-integration`)
-- `{req_name}` **MUST** ser consistente en los 3 ficheros del set
-- Los tipos son: `spec`, `architecture`, `test-plan`
-- El patrón completo es: `{req_name}.{type}.md`
+- `{req_name}` **MUST** ser consistente en todos los ficheros del set y en el nombre del directorio
+- Los tipos de contrato son: `spec`, `architecture`, `test-plan`
+- El patrón completo es: `.github/plans/{req_name}/{req_name}.{type}.md`
 
 ### Contrato `{req_name}.spec.md`
 
@@ -263,9 +266,9 @@ Los agentes y humanos **SHOULD** actualizar `memory.md` en cada handoff signific
 
 | Agente / Workflow | Rol | Produce |
 |-------------------|-----|---------|
-| `@al-architect` | Solution Architect — diseña la solución, flujos de datos, decisiones estratégicas | `{req_name}.architecture.md` |
-| `al-spec.create` | Spec técnica detallada — lee `architecture.md`, genera blueprint implementable con IDs, firmas, código AL | `{req_name}.spec.md` |
-| `@al-conductor` | Orquestador TDD — lee spec + architecture, coordina planning → implement → review | implementación + `{req_name}.test-plan.md` |
+| `@al-architect` | Solution Architect — diseña la solución, flujos de datos, decisiones estratégicas | `.github/plans/{req_name}/{req_name}.architecture.md` |
+| `al-spec.create` | Spec técnica detallada — lee `architecture.md`, genera blueprint implementable con IDs, firmas, código AL | `.github/plans/{req_name}/{req_name}.spec.md` |
+| `@al-conductor` | Orquestador TDD — lee spec + architecture, coordina planning → implement → review | implementación + `.github/plans/{req_name}/{req_name}.test-plan.md` |
 | `@al-developer` | Implementación táctica directa — lee spec, sin TDD orquestado | implementación |
 
 ### Flujo de creación de artefactos
@@ -273,13 +276,13 @@ Los agentes y humanos **SHOULD** actualizar `memory.md` en cada handoff signific
 #### MEDIUM / HIGH (con arquitectura + TDD)
 
 1. Asignar `{req_name}` (kebab-case)
-2. `@al-architect` → genera `{req_name}.architecture.md` con diseño aprobado
+2. `@al-architect` → genera `.github/plans/{req_name}/{req_name}.architecture.md` con diseño aprobado
    - ⚠️ **GATE**: aprobar arquitectura antes de continuar
-3. `@workspace use al-spec.create` → lee `architecture.md` y codebase → genera `{req_name}.spec.md`
+3. `@workspace use al-spec.create` → lee `architecture.md` y codebase → genera `.github/plans/{req_name}/{req_name}.spec.md`
    - Spec técnica: object IDs, field types, procedure signatures, tests Given/When/Then
    - ⚠️ **GATE**: aprobar spec antes de implementar
 4. Actualizar `memory.md` global con contexto del requerimiento
-5. `@al-conductor` → orquesta ciclo TDD referenciando spec + architecture:
+5. `@al-conductor` → orquesta ciclo TDD desde `.github/plans/{req_name}/`:
    - planning-subagent (research) → implement-subagent (TDD) → review-subagent (review)
    - ⚠️ **GATE**: validación humana por fase
 6. Entrega → `@workspace use al-pr-prepare` → actualizar `memory.md`
@@ -288,7 +291,7 @@ Los agentes y humanos **SHOULD** actualizar `memory.md` en cada handoff signific
 #### LOW (sin arquitectura formal)
 
 1. Asignar `{req_name}` (kebab-case)
-2. `@workspace use al-spec.create` → genera `{req_name}.spec.md` directamente desde codebase
+2. `@workspace use al-spec.create` → genera `.github/plans/{req_name}/{req_name}.spec.md` directamente desde codebase
    - ⚠️ **GATE**: aprobar spec antes de implementar
 3. Actualizar `memory.md` global
 4. `@al-developer` → implementa directamente usando spec como blueprint

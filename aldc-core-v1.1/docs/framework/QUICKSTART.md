@@ -77,16 +77,16 @@ Resultado esperado: `✅ ALDC Core v1.1 COMPLIANT`
 ### Requerimiento LOW (sin arquitectura)
 
 1. Asignar nombre: `{req_name}` en kebab-case (ej: `customer-discount`)
-2. `@workspace use al-spec.create` → genera `.github/plans/customer-discount.spec.md`
+2. `@workspace use al-spec.create` → genera `.github/plans/customer-discount/customer-discount.spec.md`
 3. `@al-developer` → implementa directamente (carga skills según necesidad)
 4. Actualizar `memory.md` con resultado
 
 ### Requerimiento MEDIUM/HIGH (con arquitectura + TDD)
 
 1. Asignar nombre: `{req_name}` (ej: `api-integration`)
-2. `@al-architect` → genera `.github/plans/api-integration.architecture.md`
+2. `@al-architect` → genera `.github/plans/api-integration/api-integration.architecture.md`
    - ⚠️ **GATE**: aprobar arquitectura antes de continuar
-3. `@workspace use al-spec.create` → lee `architecture.md` → genera `.github/plans/api-integration.spec.md`
+3. `@workspace use al-spec.create` → lee `architecture.md` → genera `.github/plans/api-integration/api-integration.spec.md`
    - Spec técnica: object IDs, procedure signatures, tests Given/When/Then
    - ⚠️ **GATE**: aprobar spec antes de implementar
 4. Actualizar `memory.md` con contexto del nuevo requerimiento
@@ -101,10 +101,13 @@ Resultado esperado: `✅ ALDC Core v1.1 COMPLIANT`
 
 ```
 .github/plans/
-  memory.md                              ← GLOBAL (proyecto)
-  api-integration.spec.md               ← per-requirement
-  api-integration.architecture.md
-  api-integration.test-plan.md
+  memory.md                                         ← GLOBAL (proyecto)
+  api-integration/                                  ← directorio por requerimiento
+    api-integration.architecture.md
+    api-integration.spec.md
+    api-integration.test-plan.md
+    api-integration-phase-1-complete.md
+    api-integration-complete.md
 ```
 
 ## Routing de agentes

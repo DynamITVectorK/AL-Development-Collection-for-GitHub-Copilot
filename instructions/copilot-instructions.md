@@ -96,28 +96,33 @@ These instruction files activate automatically based on file type — no invocat
 
 ## Plans
 
-Requirement sets live in `.github/plans/`:
+Requirement sets live in `.github/plans/`, one subdirectory per requirement:
 
 ```
 .github/plans/
-├── memory.md                    # Global memory (decisions, context across sessions)
-├── {req_name}.spec.md           # Functional-technical specification
-├── {req_name}.architecture.md   # Architecture decisions
-└── {req_name}.test-plan.md      # Test plan with acceptance criteria
+├── memory.md                              # Global memory (decisions, context across sessions)
+└── {req_name}/                            # One directory per requirement
+    ├── {req_name}.spec.md                 # Functional-technical specification
+    ├── {req_name}.architecture.md         # Architecture decisions
+    ├── {req_name}.test-plan.md            # Test plan with acceptance criteria
+    ├── {req_name}-phase-<N>-complete.md   # Phase completion reports (conductor)
+    └── {req_name}-complete.md             # Final completion report (conductor)
 ```
+
+> `memory.md` is GLOBAL and lives directly in `.github/plans/` (not in a subdirectory).
 
 ### Workflow with plans
 
 **MEDIUM / HIGH:**
 
-1. `@al-architect` — Designs solution, creates `{req_name}.architecture.md`
-2. `@workspace use al-spec.create` — Reads architecture, generates `{req_name}.spec.md` (detailed blueprint: object IDs, procedure signatures, AL code)
-3. `@al-conductor` — Reads spec + architecture, orchestrates TDD: planning → implementation → review
+1. `@al-architect` — Designs solution, creates `.github/plans/{req_name}/{req_name}.architecture.md`
+2. `@workspace use al-spec.create` — Reads architecture, generates `.github/plans/{req_name}/{req_name}.spec.md` (detailed blueprint: object IDs, procedure signatures, AL code)
+3. `@al-conductor` — Reads spec + architecture from `.github/plans/{req_name}/`, orchestrates TDD: planning → implementation → review
 4. `@workspace use al-pr-prepare` — Prepares PR referencing the plan
 
 **LOW:**
 
-1. `@workspace use al-spec.create` — Generates `{req_name}.spec.md` directly from codebase
+1. `@workspace use al-spec.create` — Generates `.github/plans/{req_name}/{req_name}.spec.md` directly from codebase
 2. `@al-developer` — Implements directly using spec as blueprint
 
 ## Complexity-Based Tool Selection

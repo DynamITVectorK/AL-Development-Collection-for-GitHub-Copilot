@@ -152,9 +152,9 @@ After presenting the plan:
 2. DO NOT start implementation until user confirms
 3. Present open questions and wait for answers
 4. If test-plan.md does not exist for this requirement, CREATE IT from template during planning
-5. Verify requirement set completeness: {req_name}.spec.md + .architecture.md + .test-plan.md
+5. Verify requirement set completeness: `.github/plans/{req_name}/{req_name}.spec.md` + `.architecture.md` + `.test-plan.md`
 
-7. **Write Plan File**: Once approved, write the plan to `.github/plans/<task-name>-plan.md`.
+7. **Write Plan File**: Once approved, write the plan to `.github/plans/<task-name>/<task-name>-plan.md`.
 
 **CRITICAL**: You DON'T implement the code yourself. You ONLY orchestrate subagents to do so.
 
@@ -266,12 +266,12 @@ Phase {N}/{Total} complete: {Phase Name}
    - Files/functions created/changed
    - Review status (approved/issues addressed)
 
-2. **Write Phase Completion File**: Create `.github/plans/<task-name>-phase-<N>-complete.md` following `<phase_complete_style_guide>`.
+2. **Write Phase Completion File**: Create `.github/plans/<task-name>/<task-name>-phase-<N>-complete.md` following `<phase_complete_style_guide>`.
 
 3. **Generate Git Commit Message**: Provide a commit message following `<git_commit_style_guide>` in a plain text code block for easy copying.
 
 4. **HARD GATE — PHASE COMMIT**:
-   - You MUST have written `.github/plans/<task-name>-phase-<N>-complete.md` BEFORE presenting this checkpoint
+   - You MUST have written `.github/plans/<task-name>/<task-name>-phase-<N>-complete.md` BEFORE presenting this checkpoint
    - You MUST show "💾 Ready to commit?" and WAIT for user response
    - You MUST NOT invoke al-implement-subagent for the next phase until user confirms
    - Proceeding without confirmation is a Core v1.1 violation
@@ -283,7 +283,7 @@ Phase {N}/{Total} complete: {Phase Name}
 
 ### Phase 3: Plan Completion
 
-1. **Compile Final Report**: Create `.github/plans/<task-name>-complete.md` following `<plan_complete_style_guide>` containing:
+1. **Compile Final Report**: Create `.github/plans/<task-name>/<task-name>-complete.md` following `<plan_complete_style_guide>` containing:
    - Overall summary of what was accomplished
    - All phases completed
    - All AL objects created/modified across entire plan
@@ -425,7 +425,7 @@ When invoking subagents:
 
 ### <phase_complete_style_guide>
 
-File name: `.github/plans/<plan-name>-phase-<phase-number>-complete.md` (use kebab-case)
+File name: `.github/plans/<plan-name>/<plan-name>-phase-<phase-number>-complete.md` (use kebab-case)
 
 ```markdown
 ## Phase {Phase Number} Complete: {Phase Title}
@@ -462,7 +462,7 @@ File name: `.github/plans/<plan-name>-phase-<phase-number>-complete.md` (use keb
 
 ### <plan_complete_style_guide>
 
-File name: `.github/plans/<plan-name>-complete.md` (use kebab-case)
+File name: `.github/plans/<plan-name>/<plan-name>-complete.md` (use kebab-case)
 
 ```markdown
 ## Plan Complete: {Task Title}
@@ -824,10 +824,10 @@ Before starting orchestration, **ALWAYS check for existing context** in `.github
 
 ```
 Checking for context:
-1. .github/plans/*.architecture.md → Architectural designs (from @al-architect)
-2. .github/plans/*.spec.md → Technical specifications (from al-spec.create)
-3. .github/plans/memory.md → Global memory (decisions, context, cross-session state — append-only)
-4. .github/plans/*.test-plan.md → Test strategies
+1. .github/plans/memory.md → Global memory (decisions, context, cross-session state — append-only)
+2. .github/plans/{req_name}/{req_name}.architecture.md → Architectural design (from @al-architect)
+3. .github/plans/{req_name}/{req_name}.spec.md → Technical specification (from al-spec.create)
+4. .github/plans/{req_name}/{req_name}.test-plan.md → Test strategy
 ```
 
 **Why this matters**:
@@ -855,21 +855,21 @@ When delegating to subagents, **provide context references** to architecture, sp
 
 ### Documentation Creation During Orchestration
 
-You **create phase completion files** as orchestrator. After each phase completes and is approved, create `.github/plans/<task-name>-phase-<N>-complete.md` referencing architecture and spec compliance, documenting what was implemented, and noting any deviations with justification.
+You **create phase completion files** as orchestrator. After each phase completes and is approved, create `.github/plans/<task-name>/<task-name>-phase-<N>-complete.md` referencing architecture and spec compliance, documenting what was implemented, and noting any deviations with justification.
 
-At plan completion, create `.github/plans/<task-name>-complete.md` summarizing all phases, overall architecture and spec compliance, and providing final verification.
+At plan completion, create `.github/plans/<task-name>/<task-name>-complete.md` summarizing all phases, overall architecture and spec compliance, and providing final verification.
 
 **Integration Pattern (MEDIUM / HIGH):**
 ```markdown
-1. @al-architect designs → Creates {req_name}.architecture.md  ← MANDATORY GATE
-2. @workspace use al-spec.create → Reads architecture → Creates {req_name}.spec.md  ← MANDATORY GATE
-3. User invokes @al-conductor → Reads spec + architecture from .github/plans/, starts orchestration
+1. @al-architect designs → Creates .github/plans/{req_name}/{req_name}.architecture.md  ← MANDATORY GATE
+2. @workspace use al-spec.create → Reads architecture → Creates .github/plans/{req_name}/{req_name}.spec.md  ← MANDATORY GATE
+3. User invokes @al-conductor → Reads spec + architecture from .github/plans/{req_name}/, starts orchestration
 4. al-planning-subagent → References architecture/spec during research + creates test-plan
 5. Plan approval gate → MANDATORY user confirmation
 6. al-implement-subagent → TDD cycle with architecture + spec compliance
 7. al-review-subagent → Validates against spec + architecture + test-plan
 8. Phase checkpoints → User visibility into progress
-9. Completion → Creates plan-complete.md, appends to .github/plans/memory.md
+9. Completion → Creates {req_name}/{req_name}-complete.md, appends to .github/plans/memory.md
 ```
 
 **Integration Pattern (LOW):**
