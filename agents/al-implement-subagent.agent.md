@@ -22,10 +22,20 @@ You DO NOT interact with the user. You DO NOT make architectural decisions. You 
 
 Every phase MUST follow the RED → GREEN → REFACTOR cycle:
 
+### Step 0: VERIFY TEST INFRASTRUCTURE
+
+Before writing any test code:
+- Read `test/app.json` (or the test project's `app.json`) for `idRanges` and `dependencies`
+- If **Library Assert** dependency is missing → add it and run `AL: Download Symbols`
+- If **Any** dependency is missing → add it and run `AL: Download Symbols`
+- Identify the available test ID range for new test codeunits
+
+**This step is MANDATORY before writing any test code.**
+
 ### Step 1: Read Phase Requirements
 - Read the phase number, objective, and AL objects to create/modify from the Conductor's instructions
-- Read the referenced `.github/plans/{req_name}.spec.md` and `.github/plans/{req_name}.architecture.md`
-- Understand the test expectations from `.github/plans/{req_name}.test-plan.md`
+- Read the referenced `.github/plans/{req_name}/{req_name}.spec.md` and `.github/plans/{req_name}/{req_name}.architecture.md`
+- Understand the test expectations from `.github/plans/{req_name}/{req_name}.test-plan.md`
 
 ### Step 2: Create TEST Files FIRST (RED State)
 - Create test codeunit(s) in the test project directory
@@ -248,6 +258,101 @@ When the phase involves test strategy or test design, load and follow:
 - @file skills/skill-testing.md
 
 </domain_skills>
+
+<common_al_test_pitfalls>
+
+## Common AL Test Pitfalls
+
+### Test Project Dependencies (VERIFY BEFORE WRITING ANY TEST)
+
+Before creating ANY test file, you MUST:
+1. Read `test/app.json` (or the test project's `app.json`)
+2. Verify `idRanges` — test codeunit IDs MUST be within this range
+3. Verify these dependencies exist; if missing, **ADD them**:
+
+```json
+{
+  "dependencies": [
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f36571571",
+      "name": "Library Assert",
+      "publisher": "Microsoft",
+      "version": "24.0.0.0"
+    },
+    {
+      "id": "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
+      "name": "Any",
+      "publisher": "Microsoft",
+      "version": "24.0.0.0"
+    }
+  ]
+}
+```
+
+4. After adding dependencies, run `AL: Download Symbols`
+
+### Correct Test Library References
+
+```al
+// CORRECT:
+var
+    Assert: Codeunit "Library Assert";   // WITH quotes, FULL name "Library Assert"
+    Any: Codeunit Any;                   // WITHOUT quotes
+
+// WRONG — causes AL0185 compilation error:
+    Assert: Codeunit Assert;             // MISSING "Library" prefix — WILL FAIL
+    Assert: Codeunit "Assert";           // WRONG name — WILL FAIL
+```
+
+### Test Object ID Management
+
+**CRITICAL**: Test IDs MUST be within the test project's `app.json` `idRanges`.
+
+Before assigning ANY test codeunit ID:
+1. Read `test/app.json` → `"idRanges"` field
+2. Search `test/` folder for existing test codeunit IDs to avoid collisions
+3. Use only IDs within the allowed range
+4. If no separate test range exists, use the LAST portion of the main range
+
+**NEVER assume an ID is available. ALWAYS read `app.json` and search existing files first.**
+
+### Test Codeunit Template
+
+Every test codeunit MUST follow this structure:
+
+```al
+codeunit <ID within test idRange> "<Prefix> <Name> Tests"
+{
+    Subtype = Test;
+    TestPermissions = TestPermissions::Disabled;
+
+    var
+        Assert: Codeunit "Library Assert";
+        Any: Codeunit Any;
+        IsInitialized: Boolean;
+
+    local procedure Initialize()
+    begin
+        if IsInitialized then
+            exit;
+        // shared setup
+        IsInitialized := true;
+    end;
+
+    [Test]
+    procedure TestScenarioName()
+    begin
+        // [GIVEN]
+        Initialize();
+        // [WHEN]
+        // action
+        // [THEN]
+        Assert.AreEqual(Expected, Actual, 'Description of expected result');
+    end;
+}
+```
+
+</common_al_test_pitfalls>
 
 <output_format>
 
