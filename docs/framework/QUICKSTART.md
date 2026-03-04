@@ -26,10 +26,9 @@ agents/                                ← 4 agentes públicos
   al-conductor.agent.md
   al-developer.agent.md
   al-presales.agent.md
-  orchestra/                           ← 3 subagents internos
-    al-planning-subagent.agent.md
-    al-implement-subagent.agent.md
-    al-review-subagent.agent.md
+  al-planning-subagent.agent.md        ← subagent interno (user-invokable: false)
+  al-implement-subagent.agent.md       ← subagent interno (user-invokable: false)
+  al-review-subagent.agent.md          ← subagent interno (user-invokable: false)
 
 prompts/                               ← 6 workflows
   al-spec.create.prompt.md
@@ -121,6 +120,8 @@ Resultado esperado: `✅ ALDC Core v1.1 COMPLIANT`
 | Estimar proyecto, sizing, propuesta | `@al-presales` |
 
 Los agentes cargan skills automáticamente según el contexto de la tarea. No necesitas invocar skills directamente.
+
+**Skills Evidencing**: Todos los agentes declaran qué skills cargaron y qué patrones aplicaron. El implement-subagent reporta `### Skills Loaded` en cada fase, el review-subagent verifica con `Skills Compliance Check`, y el conductor consolida en tablas de `Skills Applied in This Phase` y `Skills Utilization Summary`.
 
 **Flujo resumido:** MEDIUM/HIGH: `@al-architect` → `al-spec.create` → `@al-conductor` | LOW: `al-spec.create` → `@al-developer`
 

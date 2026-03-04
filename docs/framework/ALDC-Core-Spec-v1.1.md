@@ -47,8 +47,7 @@ Un repositorio ALDC Core **MUST** contener:
   - Requirement sets: `{req_name}.spec.md`, `{req_name}.architecture.md`, `{req_name}.test-plan.md` por cada requerimiento activo
 - Un entrypoint repo-wide de Copilot en `.github/copilot-instructions.md`.
 - Un toolkit (en `toolkitRoot`) con:
-  - `agents/` (agentes invocables por el usuario)
-  - `agents/orchestra/` (subagents internos del conductor, `user-invokable: false`)
+  - `agents/` (agentes invocables por el usuario + subagents internos con `user-invokable: false`)
   - `instructions/`
   - `prompts/`
   - `skills/` (módulos de conocimiento composables)
