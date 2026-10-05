@@ -3,6 +3,8 @@
 // Copilot Chat installation only. Never imported by terminal surface generators.
 const path = require('path');
 const { project: normalize, roles } = require('./native-profile');
+// Confirmed from the user's local VS Code model selector on 2026-10-05.
+const chatModel = 'Claude Sonnet 5.5 (copilot)';
 const lspQueries = [
   'bclsp_goToDefinition', 'bclsp_hover', 'bclsp_findReferences',
   'bclsp_prepareCallHierarchy', 'bclsp_incomingCalls', 'bclsp_outgoingCalls',
@@ -29,6 +31,8 @@ function project(relative, input, profile) {
   const end = text.indexOf('\n---', 3);
   let front = text.slice(0, end);
   let body = text.slice(end + 4);
+  // Only explicit Chat selections change; model-less prompts keep inheriting.
+  front = front.replace(/^(\s*)model: [^\n]+$/gm, (_, indent) => `${indent}model: ${chatModel}`);
   const coordinator = role === 'al-conductor' || role === 'al-memory.create';
   const implementation = ['al-developer', 'al-implement-subagent', 'al-build'].includes(role);
   const setup = role === 'al-initialize';
@@ -65,4 +69,4 @@ function project(relative, input, profile) {
   return Buffer.from((front + '\n---' + body).replace(/\n/g, eol));
 }
 
-module.exports = { project, lspQueries, queries, writes };
+module.exports = { project, chatModel, lspQueries, queries, writes };

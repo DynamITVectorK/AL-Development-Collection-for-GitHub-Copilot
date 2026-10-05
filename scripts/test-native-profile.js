@@ -9,7 +9,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const yaml = require('js-yaml');
 const { project } = require('./native-profile');
-const { project: chatProject } = require('./chat-profile');
+const { project: chatProject, chatModel } = require('./chat-profile');
 const root = path.resolve(__dirname, '..');
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'aldc-native-profile-'));
 let checks = 0;
@@ -109,7 +109,7 @@ try {
       const installed = path.join(fixture, '.github', tree, name);
       const text = read(installed), metadata = fm(text);
       const original = fm(read(path.join(root, tree, name)));
-      check(metadata.model === original.model, `Model preserved: ${name}`);
+      check(metadata.model === (original.model ? chatModel : undefined), `Chat model selected: ${name}`);
       assert.deepEqual(metadata.handoffs, original.handoffs); checks++;
       check(!metadata.tools.some(t => /al-symbols-mcp|atlas/i.test(t)), `No obsolete provider grant: ${name}`);
       check(metadata.tools.filter(t => t.startsWith('ms-dynamics-smb.al/')).every(t => allowed.has(t.split('/')[1])), `Catalog names: ${name}`);
