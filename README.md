@@ -21,10 +21,34 @@ _Engineering systems, visibly reasoned._
 ALDC combines specialist agents, reusable domain skills and human approval to
 support Business Central extension development from requirements to review.
 
-**Release status:** canonical package and plugin manifests declare **5.0.0**.
-These changes are released as [5.0.0](CHANGELOG.md).
-Previously built VSIX files retain their original version and packaged snapshot.
-Installing newer source content does not itself publish a Marketplace update.
+**Release status:** ALDC **5.0.1** is available in the
+[GitHub release](https://github.com/javiarmesto/ALDC-AL-Development-Collection/releases/tag/v5.0.1).
+GitHub releases and VS Code Marketplace publication are separate deliveries;
+check the Marketplace listing for its currently published version.
+
+## What changed in 5.0.1
+
+- **Copilot Chat models:** the Chat installer selects `Claude Sonnet 5.5 (copilot)`
+  for all 12 agents and the five prompts with explicit model selections, in both
+  `bc28` and `bc29-native`. The other six prompts inherit the selected agent.
+  Claude Code, Copilot CLI and Codex keep their own model selections. Availability
+  still depends on your Copilot account and host.
+- **Chat AL tooling:** role-specific AL LSP and official AL MCP guidance, with
+  query-only roles separated from implementation and dependency setup. Tool
+  declarations do not install a provider or prove a successful invocation.
+- **Initialize for existing projects:** a preparation-only route verifies access
+  on the executing MCP connection, with bounded registration/retry when authorized;
+  it does not fall through to scaffolding, restoring dependencies or building.
+- **Installation and packaging:** Chat projection applies to both profiles;
+  install/update/profile changes and rollback preserve existing `.vscode/mcp.json`.
+  The VSIX carries the projector and its guide, with equal package versions and
+  provenance from clean pinned inputs.
+- **Shared fixes:** corrected the terminal symbol-server package, plugin verification
+  of derived locks, and templates that previously hard-coded a surface's plans root.
+
+Update the extension and the toolkit files in each existing project separately.
+Review managed-file collisions so a preserved older agent does not silently keep
+its previous model. See the [5.0.1 changelog](CHANGELOG.md) for details.
 
 | Capability | What it provides |
 | --- | --- |
