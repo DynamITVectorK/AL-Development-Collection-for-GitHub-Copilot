@@ -1,6 +1,26 @@
 # ALDC Changelog
 
-## [5.0.1] - 2026-09-19
+## [5.0.1] - 2026-10-05
+
+### Changed
+
+- Copilot Chat's installer projection selects `Claude Sonnet 5.5 (copilot)` for
+  all 12 agents and five prompts with explicit models in BC28 and BC29-native.
+  Model-less prompts inherit the selected agent; explicit handoff model overrides
+  follow the same policy. Canonical shared agents and terminal model selections
+  are unchanged.
+- Chat AL tooling guidance distinguishes AL LSP, official AL MCP and terminal
+  providers; grants remain role-scoped and build/publication human gates remain.
+- Initialize can prepare an existing App/Test on the actual executing AL MCP
+  connection without running full setup. Registration and retry are bounded;
+  a parent connection does not establish readiness for a child agent.
+- Installation, profile switching and rollback retain the consumer's existing
+  `.vscode/mcp.json`. The extension packages the Chat projector and guide from
+  matching clean canonical/extension inputs.
+
+Tool availability and model execution require the host's actual capabilities.
+Architect/Spec's BCQuality context path remains direct corpus reading; automatic
+`al-knowledge` integration is not included in this release.
 
 ### Fixed
 
