@@ -1,5 +1,17 @@
 # ALDC Changelog
 
+## [5.0.2] - 2026-10-06
+
+### Fixed
+
+- Select `Claude Sonnet 5.5 (copilot)` in the 12 base agent templates and five
+  explicitly modelled prompts, including Foundation copies. Chat no longer relies
+  solely on installer projection for these model selections.
+- Recognise unmodified receipt-free 5.0.0 source installations during updates;
+  preserve customized files as visible collisions.
+- Validate raw template models and real legacy upgrades. Terminal model choices
+  remain unchanged. Existing projects still require a reviewed toolkit update.
+
 ## [5.0.1] - 2026-10-05
 
 ### Changed
