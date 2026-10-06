@@ -32,6 +32,16 @@ const digestFiles = directory => {
 };
 
 try {
+  // Base copies are also consumed without the installer/projector.
+  for (const tree of ['agents', 'prompts']) {
+    for (const name of fs.readdirSync(path.join(root, tree)).filter(n => /\.(agent|prompt)\.md$/.test(n))) {
+      const source = read(path.join(root, tree, name));
+      const metadata = fm(source);
+      check(metadata.model === undefined || metadata.model === chatModel, `Base Chat model: ${tree}/${name}`);
+      check(!(metadata.handoffs || []).some(h => h.model && h.model !== chatModel), `Base handoff model: ${tree}/${name}`);
+      if (tree === 'agents') check(metadata.model === chatModel, `Base agent has explicit model: ${name}`);
+    }
+  }
   // Existing-project MCP preparation must survive each distribution's Phase 0
   // injection and must not grant registration to specialist Chat agents.
   const initialize = read(path.join(root, 'prompts/al-initialize.prompt.md'));
@@ -69,6 +79,23 @@ try {
     const source = read(path.join(root, `agents/${role}.agent.md`));
     for (const content of [source, project(`agents/${role}.agent.md`, Buffer.from(source)).toString()]) {
       check(!fm(content).tools.some(t => t.includes('al_addproject')), `${role}: no new setup grant`);
+    }
+  }
+  // A receipt-free 5.0.0 copy must be recognised as toolkit content, rather
+  // than silently keeping its old model as a presumed customization.
+  if (sourceCheckout) {
+    const legacy = path.join(tmp, 'legacy'); fs.mkdirSync(path.join(legacy, '.github/agents'), { recursive: true });
+    const { execFileSync } = require('child_process');
+    for (const name of fs.readdirSync(path.join(root, 'agents')).filter(n => n.endsWith('.agent.md'))) {
+      const old = execFileSync('git', ['show', `v5.0.0:agents/${name}`], { cwd: root });
+      fs.writeFileSync(path.join(legacy, '.github/agents', name), old);
+    }
+    const upgraded = installer(legacy, ['--json']);
+    check(upgraded.status === 0, `Legacy upgrade: ${upgraded.stderr}`);
+    const report = JSON.parse(upgraded.stdout);
+    for (const name of fs.readdirSync(path.join(root, 'agents')).filter(n => n.endsWith('.agent.md'))) {
+      check(fm(read(path.join(legacy, '.github/agents', name))).model === chatModel, `5.0.0 copy updated: ${name}`);
+      check(report.files.find(f => f.path === `.github/agents/${name}`).recognised, `5.0.0 copy recognised: ${name}`);
     }
   }
   const fixture = path.join(tmp, 'project'); fs.mkdirSync(fixture);

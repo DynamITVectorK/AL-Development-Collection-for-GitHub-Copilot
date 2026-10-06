@@ -2,7 +2,7 @@
 name: AL Spec Agent
 description: 'Turn an approved Business Central requirement and architecture into one implementable AL specification. Own technical contracts and acceptance criteria without writing AL implementation or changing architecture.'
 tools: [vscode/askQuestions, vscode/toolSearch, read/readFile, read/skill, edit/createFile, edit/editFiles, search, 'al-symbols-mcp/*', 'microsoft-learn/*', 'upstash/context7/*', ms-dynamics-smb.al/al_symbolsearch, ms-dynamics-smb.al/al_symbolrelations, todo]
-model: Claude Sonnet 4.6 (copilot)
+model: Claude Sonnet 5.5 (copilot)
 argument-hint: 'Requirement name, LOW/MEDIUM/HIGH, and approved architecture or assigned bounded unit'
 handoffs:
   - label: Review multi-spec consistency

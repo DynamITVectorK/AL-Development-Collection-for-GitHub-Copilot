@@ -4,7 +4,7 @@ description: 'Independent read-only review of an AL increment implemented direct
 user-invocable: true
 argument-hint: 'Objective, acceptance criteria, files/diff and available build/test evidence'
 tools: [read/readFile, read/problems, search, 'al-symbols-mcp/*', ms-dynamics-smb.al/al_symbolsearch, ms-dynamics-smb.al/al_get_diagnostics, ms-dynamics-smb.al/al_symbolrelations]
-model: Claude Sonnet 4.6 (copilot)
+model: Claude Sonnet 5.5 (copilot)
 handoffs:
   - label: Return findings to Developer
     agent: AL Implementation Specialist
