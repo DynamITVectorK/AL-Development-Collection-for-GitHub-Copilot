@@ -42,8 +42,8 @@
     "instructions/al-performance.instructions.md": "1db9c2e08bfec26a63990e1c05229f7ed15fb2fa92e6b65ab2b8eb40c1fdf1df",
     "instructions/al-testing.instructions.md": "ab88c39c39d2bd0bbdd00e4224b050004e8d587d7e381a1e5b0d075b985be0c3",
     "instructions/copilot-instructions.md": "7c7aa902a97ecb39b7c6addb5460eaaf53f3bcc56bcb9817b03e16fb03b6706f",
-    "package.json": "d362a05905118eb6167a430d46d3ea23a3140abc079c7308bb693f9c18b35264",
-    "plugin.json": "33915950667437d8c7afbdf310c78e575321e9978b10a6ec12ec0bd9b0c3758b",
+    "package.json": "fdca45fa5c154ef8f70740ceee8837d6498e579f14cdb2c9199d81a89b3660ee",
+    "plugin.json": "d4fee82966ad7b6ed15de9bc20e4acff2b21d61e71d8ca453a543d09685b8115",
     "prompts/al-agent.build-instructions.prompt.md": "1080481dc7f897b6a67f06ab8da8260d8bd67dddfdf34e3091a351711be64044",
     "prompts/al-agent.create.prompt.md": "c5220663504e12fbfc07c2b24fa71f0b5922acdf7a7eef0ef0c794c1aa3f93c3",
     "prompts/al-agent.instructions.prompt.md": "1080481dc7f897b6a67f06ab8da8260d8bd67dddfdf34e3091a351711be64044",
@@ -109,8 +109,8 @@
     "tools/context-doctor/aldc_context_doctor.py": "8792be3dd86d3716c5fe08afc6477e21bed90f4855828046f1b11e5915660d5a"
   },
   "outputs": {
-    ".claude-plugin/marketplace.json": "95e7092fc8fc52d8188b327ef82a2190ff65f88ef797d626d75149bc1c3a46e5",
-    ".claude-plugin/plugin.json": "82b13af3bd227225bf45c82e8fb1728e5fc05c635af3304631a9241d192aaa03",
+    ".claude-plugin/marketplace.json": "301425f18b895b14a7bd9cf69d4175327daeafe51f45c2a2f0a8127d23b85443",
+    ".claude-plugin/plugin.json": "901d535bdf3b9a41d35282e4dd51af310bcffd60c34db7cceaed5482a525bca7",
     ".mcp.json": "085c9a97ebd647d44dd6dc6f82c3cc79a57afcf53438f4d0251d7054bcb4522b",
     "CLAUDE.md": "9cfcde56a0e386d66290e53ba8aa2a19d71c6abfbc9b8e54016d6ce2323a85fd",
     "README.md": "aa3d7243dddc8027ceae5f5bd67e67894091abc1c65d11631fdfc29432cab6d1",
