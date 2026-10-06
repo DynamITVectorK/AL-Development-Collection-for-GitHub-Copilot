@@ -5,49 +5,76 @@
     {
       "tag": "v4.2.0",
       "files": 156
+    },
+    {
+      "tag": "v5.0.0",
+      "files": 134
     }
   ],
   "paths": {
     ".github/agents/al-agent-builder.agent.md": [
-      "7ab22336276eeb1b36da3a72cbf28659b08b3b436507ec3342de27e0928f4124"
+      "7ab22336276eeb1b36da3a72cbf28659b08b3b436507ec3342de27e0928f4124",
+      "98536a334d35dd61fd45425bd4606b37103e1955fff15410eaf2b2b1f77420a8"
     ],
     ".github/agents/al-architect.agent.md": [
+      "565aafcce3323154ae890b56199c85892ed922e39b75d7741adffa890d753f3a",
       "a5f4b7441c163f71802f0758f024f7d602a88d9e5599fa5692f7fa71bf09168b"
     ],
     ".github/agents/al-conductor.agent.md": [
-      "c7849b710be4cf3c2696aa2bc8f68e34a085793820b28b3ee0a03b3d666ae8e8"
+      "c7849b710be4cf3c2696aa2bc8f68e34a085793820b28b3ee0a03b3d666ae8e8",
+      "ec2f52a207221dddcf1a3510be5b42ad259dace5969f69555c26ef5ed551bdb9"
+    ],
+    ".github/agents/al-developer-reviewer.agent.md": [
+      "5696c5fd62df1b2caccf85d9240f9d70e259e559061c01348f9e789dcb21c4e9"
     ],
     ".github/agents/al-developer.agent.md": [
-      "29ae48dca4b874ee706ce6dbc0962e57311a5a3f5a66d08493eaa49b61a606a2"
+      "29ae48dca4b874ee706ce6dbc0962e57311a5a3f5a66d08493eaa49b61a606a2",
+      "50908bda52596e383aa7d1a44d3437d1d7fa928df14e76a22bba335f4a8c8eb6"
     ],
     ".github/agents/al-implement-subagent.agent.md": [
-      "8d64ae927984ec318129b17142b47e3ce1e4276408a39e933e2b3c0f7969e30a"
+      "8d64ae927984ec318129b17142b47e3ce1e4276408a39e933e2b3c0f7969e30a",
+      "b666cce2fc867572afc55c5fdda68699df39558f9e3655c047be17d3c1f16e76"
     ],
     ".github/agents/al-planning-subagent.agent.md": [
+      "42c503c31a49caacfdbc38670b871ee69a996d63303466c405dc6fb9c1cdda79",
       "5b5dc2987bcdd0e234ae7339e064ed3ec705f5e7eb17bf703bcdeb65b0f4709f"
     ],
     ".github/agents/al-presales.agent.md": [
-      "7cf88320c7d187f602773d1972142bbda865d7a85fd5de6acbb539f0b45c0ab7"
+      "7cf88320c7d187f602773d1972142bbda865d7a85fd5de6acbb539f0b45c0ab7",
+      "bb2e3fad1905c60115eab83de46ef360b4c423bc8e1b55030b82f4df909af280"
     ],
     ".github/agents/al-review-subagent.agent.md": [
+      "8bc1af1fb5d33a1f8576a36da13a634475a90f22fc1cea712940ab8fe909ef0a",
       "dadba176773fc6cc8f32dc59e699693cbb2698426ba7e79f9e4f6edfed160dcf"
     ],
+    ".github/agents/al-spec-agent.agent.md": [
+      "5d506ba504e80bfe1fd66b1047c3be98adf0b90702fad63273a072c92db26b3d"
+    ],
     ".github/agents/al-triage.agent.md": [
-      "b02457fcc8b5293afcbae1025b6783c9f6cfe8edd5659b449476348a0b03ca7f"
+      "b02457fcc8b5293afcbae1025b6783c9f6cfe8edd5659b449476348a0b03ca7f",
+      "b1518904238d7c6f6f32eac424534b947d3d637c9c75d32495a9217fe887478d"
     ],
     ".github/agents/dredd.agent.md": [
+      "51590b01d20f30beac4e0a355b98880120168e47b76ec97e00f56095f034028b",
       "e400c5357d20f3bf03f62f9cd8532373065b39bcf27efe3d1f2f795884a65cd4"
     ],
     ".github/agents/index.md": [
+      "c039f0029f175071d9ccb0676d01388c6ba0dd8ff2b989f5104b1803b92f3da1",
       "dfb4b841414bacdf36480d8228822d55d3369e3d4cb8d28c8820fd915e88709a"
     ],
+    ".github/aldc-profile.json": [
+      "44d8163d8cec11a41196d7a4702d765fc0b7cc974ffe1291192fa63adf3c2239"
+    ],
     ".github/collections/al-development.collection.yml": [
+      "0b539686b1dcf56a8cc40a3a2c8e45c435af425eec0a37eca36cb22a5c51719e",
       "29b131a0fed0bf7f8eb3048507b6f6c333ab00697224820365d28c9ef83ceb11"
     ],
     ".github/copilot-instructions.md": [
+      "33b14a0fc36f1e7bef336b66e479c7897cfb3a46a458f5e87e19d96255e09cac",
       "3631b9c980d770292cabffb47b1c420b668cb6100eed4da07573b00f8ad0dc00"
     ],
     ".github/docs/framework/ai-native-concepts.md": [
+      "5c50dff7234e19009005c6080730b8da119f5eb00062a7ff457228697489ba39",
       "8eea6cd59d14d3d21c31ef7a7778c23e29826cbb7f304fbf63040cca52a79016"
     ],
     ".github/docs/framework/ai-native-instructions-architecture.md": [
@@ -57,6 +84,7 @@
       "098dd0d1d248fba18f517e56abba90b2fd559365239240a9ffbeb9ceb75fc3ba"
     ],
     ".github/docs/framework/ALDC-Architecture-Diagrams.md": [
+      "969ba5524c544b3c659b07a0045407126298f69ece9f7084f727e8a990df7468",
       "b49cbacfc87f697e2017f184d4cae0560e9b3df7edbe874941d1d7941b854321"
     ],
     ".github/docs/framework/ALDC-Compliance-Model.md": [
@@ -64,6 +92,9 @@
     ],
     ".github/docs/framework/ALDC-Core-Spec-v1.1.md": [
       "6b3fc2268f1ff3807641c290f82800220899470c184bcd61e529f15227c78d00"
+    ],
+    ".github/docs/framework/ALDC-Core-Spec-v1.2.md": [
+      "7194edf632b208a38ea61b5ad58c692af2a1e4d7ef6589c63e3e9145af057122"
     ],
     ".github/docs/framework/ALDC-Governance.md": [
       "f4b26d6a88036b54bffd7ce38b7d1a5aa2ac91be4043bf0d770194ae47be2b8f"
@@ -77,11 +108,15 @@
     ".github/docs/framework/architecture.md": [
       "052d2b006f5f492a8670f0f974576a2bcb95b8446ea465414ce57ba84df41696"
     ],
+    ".github/docs/framework/native-al-tools.md": [
+      "8bbdef3f5413f6af8536ae9d0054df3c484e8cee0a6e25a763684d002c8cfb64"
+    ],
     ".github/docs/framework/orchestration-architecture.md": [
       "92b763507d8f6cc31c17f49b9bf1078a9860002b38143ce9127b93b01d590084"
     ],
     ".github/docs/framework/overview.md": [
-      "971192028b228cee65dd90f4930d59d1d6bb6ed9d827b89d3f41fdb887ba9542"
+      "971192028b228cee65dd90f4930d59d1d6bb6ed9d827b89d3f41fdb887ba9542",
+      "c934f4c6a65e784b490d1046f1adbb209058a8078bbd4af630eb316a8b285937"
     ],
     ".github/docs/framework/QUICKSTART.md": [
       "b16c7cc8508fc487085fc2a504deadf86c314ff9f267b79664b2056428b298a7"
@@ -90,27 +125,39 @@
       "c3adddfac140cbebaf982f8fe62e1f0d43bce1e1e7e80ab6fcbcb6ed20a815aa"
     ],
     ".github/docs/templates/architecture-template.md": [
-      "e9ee0e3a9d6571752bf406711379e3132a24c1c078cf213465595e31f2d52917"
+      "e9ee0e3a9d6571752bf406711379e3132a24c1c078cf213465595e31f2d52917",
+      "f53f82281d57800e5e9bb08f92c6e01782c3a90d40edb826fa8ef6bbd52de337"
+    ],
+    ".github/docs/templates/bcquality-design-guidance.md": [
+      "a65f732d8131b2461e130955606b3c003aa5b538df2401a291f34b4120e946ca"
+    ],
+    ".github/docs/templates/bcquality-provider-contract.md": [
+      "4421899c22c9d3120b0a7c5215030cfbe010ff4d7813170f8c90e39d0c1c466b"
     ],
     ".github/docs/templates/bcquality-task-context.md": [
-      "91e6e1bb675ebb2ff45002c96d4db6a8038faec3fef6a01b28061f2298e2b3d2"
+      "91e6e1bb675ebb2ff45002c96d4db6a8038faec3fef6a01b28061f2298e2b3d2",
+      "df251fac855c09bc48f342c21d5d1983f28eee7161536a806b135ab5dd2b1220"
     ],
     ".github/docs/templates/code-review-template.md": [
-      "12b817389da5e0689e5f021315c8f18de36e2abd559244f43999beb49b77ed04"
+      "12b817389da5e0689e5f021315c8f18de36e2abd559244f43999beb49b77ed04",
+      "1f566bffe70558e83f0b1f7dba0553b4559d01c02b4a13d531615278d1ac6939"
     ],
     ".github/docs/templates/delivery-template.md": [
       "a39f0733963af1be070176af5cdf6a85d854c8572182ad43e8eb632df8afb990"
     ],
     ".github/docs/templates/memory-template.md": [
-      "c7ec8174270266de484438baf162149acdc05d2a25afb0965d9afde67e58f92b"
+      "c7ec8174270266de484438baf162149acdc05d2a25afb0965d9afde67e58f92b",
+      "cc9a55e50c97f83dafba1a05d747d91afaf5fe3eccf7ea6bee41e25ba4c5cb4b"
     ],
     ".github/docs/templates/mkdocs-site-prompt.md": [
       "5e4c9263c218e2486e31b7c318f025c450e3f6d61b6ce67ec9c0e9ab28ffbf05"
     ],
     ".github/docs/templates/phase-complete-template.md": [
-      "0b7cdd8756e81ebdeb2b95cdb61ff721a0918c3dda8ed590d80674937587da13"
+      "0b7cdd8756e81ebdeb2b95cdb61ff721a0918c3dda8ed590d80674937587da13",
+      "afc50acacd70f838e43ae9a1e59b357c75d0f838d70b92ff81b47ad8721325d0"
     ],
     ".github/docs/templates/plan-complete-template.md": [
+      "99cd695a98483c21a987024ded5bf6925eb28eb166f53321e913df8f3cadb568",
       "e0029f6e3863c2120f956a27b44f3f3718ce35b5474e37b47776edf9863bbfd3"
     ],
     ".github/docs/templates/plan-template.md": [
@@ -119,17 +166,24 @@
     ".github/docs/templates/planning-findings-template.md": [
       "8415ed2de625eb9c9e64cb9e512f90542d5aa77d143087e9a683938cd4fe15d7"
     ],
+    ".github/docs/templates/review-report-contract.md": [
+      "98157b428d711dc8bc8aaedbd792f6a5bea13c72b6e5de373546a594d66061df"
+    ],
     ".github/docs/templates/skill-template.md": [
       "d71051d887ff1c64cc250534ae84872a531b8ad6763409184ac59877725ddd6f"
     ],
     ".github/docs/templates/spec-template.md": [
-      "634da157c9e87ef6a1a22fa419e49dff31ef413a0fd246021878eb33bddb0ae8"
+      "634da157c9e87ef6a1a22fa419e49dff31ef413a0fd246021878eb33bddb0ae8",
+      "7b60a20b9b57b19f0bdb558e4f7064135459505abf1974e8d0c89426e35b16d5"
     ],
     ".github/docs/templates/technical-spec-template.md": [
       "5b9dbd9ea80e9a060965638d8be9e2594869d0fec4f2ab280307166f9e271916"
     ],
     ".github/docs/templates/test-plan-template.md": [
       "724882202ad91657012eb2568fe69d059634429213f92805d3a9bdfd9ce42447"
+    ],
+    ".github/getting-started.md": [
+      "a9bed5252592d9526044603bf0deedd0b3778b723107538afc15700eee3c39bb"
     ],
     ".github/instructions/al-agent-toolkit.instructions.md": [
       "3939b641eccd9d21218e173366fcb71ba4834f257f4f51aa9507ee43dc45f876"
@@ -138,13 +192,15 @@
       "d5b168107cb37502d29b847308c97c15b8bf309dcc59aad02befe103d3c99dab"
     ],
     ".github/instructions/al-error-handling.instructions.md": [
+      "19db55a124e90342079104791792fa1ebecc706333723f37a92b20ae27be415e",
       "b7a17000c9725c508745b866d3a19eddf32bde14f2d167e1d350f91304fee548"
     ],
     ".github/instructions/al-events.instructions.md": [
       "0b429761029a3b68404b82eb2048f8e253ff182298e4c9c160e5c638e30e1d3e"
     ],
     ".github/instructions/al-guidelines.instructions.md": [
-      "1b41a3d1e5a0ffe32bd95c3b9fd08bda89567e2f9064bb63c04d1255dfbf2db2"
+      "1b41a3d1e5a0ffe32bd95c3b9fd08bda89567e2f9064bb63c04d1255dfbf2db2",
+      "aa0bcebcfd5e5e58101cebbb29d6447e728ade140b49646a6f76ccb2eb5484c9"
     ],
     ".github/instructions/al-naming-conventions.instructions.md": [
       "4b3158860dc68c414ea69304e4f30fe1f950981c63726a37c611aea1039212ba"
@@ -156,6 +212,7 @@
       "ab88c39c39d2bd0bbdd00e4224b050004e8d587d7e381a1e5b0d075b985be0c3"
     ],
     ".github/instructions/copilot-instructions.md": [
+      "7c7aa902a97ecb39b7c6addb5460eaaf53f3bcc56bcb9817b03e16fb03b6706f",
       "f7b5261b742a74ba73d273d1f2fc5e818b22f85e003c5348d6a7009b08ef4f41"
     ],
     ".github/instructions/index.md": [
@@ -165,7 +222,8 @@
       "ce3fa4262fc34974f458e3b5eb4cafd9855777109f0bde70a15c077785c4342f"
     ],
     ".github/plans/memory.md": [
-      "c7ec8174270266de484438baf162149acdc05d2a25afb0965d9afde67e58f92b"
+      "c7ec8174270266de484438baf162149acdc05d2a25afb0965d9afde67e58f92b",
+      "cc9a55e50c97f83dafba1a05d747d91afaf5fe3eccf7ea6bee41e25ba4c5cb4b"
     ],
     ".github/prompts/al-agent.build-instructions.prompt.md": [
       "1080481dc7f897b6a67f06ab8da8260d8bd67dddfdf34e3091a351711be64044"
@@ -198,6 +256,7 @@
       "118f15799d3275aea97d2b87b9a1d24213c9e746437a833867e37598c25167b2"
     ],
     ".github/prompts/al-spec.create.prompt.md": [
+      "7cc5c35aa91ee34704ef684f4b840071059242c2db3f8263acdba6b7f6d1ee2c",
       "af44342f5be5a82e36087667278032d38367d81151faf8057f390aea43c97d0a"
     ],
     ".github/prompts/index.md": [
@@ -207,7 +266,8 @@
       "b13de279f45c419ed7d2f89ffbc5ea431435ac247cf50bbfb211f6e82c2ff3d3"
     ],
     ".github/skills/index.md": [
-      "423125c04017e6f4f44d773ccc120e968b66c8419216fc513a3091fcd2d9b60f"
+      "423125c04017e6f4f44d773ccc120e968b66c8419216fc513a3091fcd2d9b60f",
+      "4ea19e2e19a1297927c953dbefea17e29435d1d64107f6ddd6728fa03bd2d136"
     ],
     ".github/skills/skill-agent-instructions/examples/agent-advanced-instructions.txt": [
       "f9938f734399e9ec2ad01186dbc761030dd815a1595b813e028c9914a10d9eba"
@@ -232,6 +292,9 @@
     ],
     ".github/skills/skill-agent-toolkit/SKILL.md": [
       "16abfa053d7d467a7128507132beafbb936221e0cf443070e94c3488df5c26af"
+    ],
+    ".github/skills/skill-al-review-pipeline/SKILL.md": [
+      "6b2de6db7a776d2e0c7f9cf2f1027c8093f20dba62e01cf1107f792888bb10c5"
     ],
     ".github/skills/skill-api/references/api-advanced-patterns.md": [
       "16ba8b8f7672ce1e06805a1044e8e9cb9388798a951a883cb495eee608109f40"
@@ -270,6 +333,7 @@
       "8b96b2d8306d2c077bc00ef1dabe3ae776c0dd6330d88da153155d0afca7b1cd"
     ],
     ".github/skills/skill-debug/SKILL.md": [
+      "01ff2fadc00d105106354085d3d25d09201265145bfebda114178082b6c8197d",
       "e52066bfcc0156348b8c9855ffbb7def7501c542390b5abed9d3aeb06c52d706"
     ],
     ".github/skills/skill-estimation/SKILL.md": [
@@ -293,25 +357,36 @@
     ".github/skills/skill-manifest/SKILL.md": [
       "12a5c402584958edb49073243661d6c60555e5dffdfdb09aac66995ca80f9624"
     ],
+    ".github/skills/skill-migrate/references/al18-capabilities.md": [
+      "44f48b60ae31a88110da26f7675e23458849a9abeceaef8287f6211575b3c5c1"
+    ],
+    ".github/skills/skill-migrate/references/cli-al-tools.md": [
+      "1d06779410e8525e25858f0eab1da41be5d7b7326fae317f26a6860bcdd2deb7"
+    ],
     ".github/skills/skill-migrate/SKILL.md": [
+      "bd6d70cb8d43f85efd5be3919741353d064c6d0006d1d3d5aeb42bd225e8cf0c",
       "e08799501f74001a72baa61b9226ae11a4ff6eaca6656bf58c54235694984b3d"
     ],
     ".github/skills/skill-pages/SKILL.md": [
       "0abf48098df37b4ef64e7292688f821611cf691d40cf6e89dac8ccb7d2031b32"
     ],
     ".github/skills/skill-performance/SKILL.md": [
+      "031166693fc7080d580caf8709b9bb4c3d4f35405b76c267e1b2152adef53e70",
       "db261fcd4099a46fe701825781c2c7c901c582817c3f3b926f444c2ee42239b0"
     ],
     ".github/skills/skill-permissions/SKILL.md": [
       "fa02bddb1514102d28a0b09b31a381c3716b1385902f5a1667af1253fbf1ec1d"
     ],
     ".github/skills/skill-testing/SKILL.md": [
-      "3c4921e44db8aad1a9820421285233d7cc065cb910f167a4813cbd617867377d"
+      "3c4921e44db8aad1a9820421285233d7cc065cb910f167a4813cbd617867377d",
+      "e0ea071fc19c463dc6c540513942be9515725a8137069940b4e30b4fd955d801"
     ],
     ".github/skills/skill-translate/SKILL.md": [
-      "aed26d22485fd88a9518de55f1cf64e906dc516c336de7fde360ce0462e6eda6"
+      "aed26d22485fd88a9518de55f1cf64e906dc516c336de7fde360ce0462e6eda6",
+      "e72d8d722b8ed56c5734b12f772ac1dfb262918c25a8867385ad76f055fd14be"
     ],
     ".github/tools/aldc-validate/index.js": [
+      "21a345bedfeb80ac365d3665ae18e615d12e099348c95902306296d061030c76",
       "d72c8f4642c9210b233c5a98c9381326a49ee212adc8637313b297cb2c027c48"
     ],
     ".github/tools/aldc-validate/node_modules/.package-lock.json": [
@@ -458,22 +533,76 @@
     ".github/tools/bc-agents/validate_agent_config.sh": [
       "5054f15b7722686370b30f5bbe939647466507fd137bf59c7939048d629c57a9"
     ],
+    ".github/tools/bcquality/config.js": [
+      "521191d9fc36a161c84a3ff6d3b2f152255c995bb6e1a41b87e03d7cde057a4a"
+    ],
+    ".github/tools/bcquality/index-state.js": [
+      "ee32b1a8bd7a8a3e08de2a607265954636acebbcc99686c771b883f9c08b9d28"
+    ],
+    ".github/tools/bcquality/install.ps1": [
+      "8fbdd9b80b235400bfabd4e58db9ed9e2019ad323f715de48bf6e0bd78490dd2"
+    ],
+    ".github/tools/bcquality/install.sh": [
+      "55c842e4a7aec2dd5da065211bfa061f4e8c12e1504fcaace362269b45663374"
+    ],
+    ".github/tools/bcquality/precondition_hook.ps1": [
+      "0e72ff91e78798452ee3f414a844c11e614aae4f44d79521ce40a33e57ab7640"
+    ],
+    ".github/tools/bcquality/precondition_hook.sh": [
+      "36bac27b78826fa731c4bf25d27c81ac58f18f1c3d5a3b8ca7eaa28d903ccfae"
+    ],
+    ".github/tools/bcquality/README.md": [
+      "c36a0ea38d40225168e3b556b619acd51abe941cafdf4dc4451726969021b9d8"
+    ],
+    ".github/tools/bcquality/validate_evidence.py": [
+      "10c02f21042b30b8ad7b24a6f38005e64baadcd1a1020472768dc7f7dddaaff7"
+    ],
+    ".github/tools/context-doctor/aldc_context_doctor.py": [
+      "8792be3dd86d3716c5fe08afc6477e21bed90f4855828046f1b11e5915660d5a"
+    ],
+    ".github/tools/context-doctor/README.md": [
+      "1936890ffbbd6aeed9038fa01a115289db53b11f6e7c887b062c274d1fe944a5"
+    ],
     "aldc.code-workspace": [
-      "0e94487961b4854ea1561ed50036c7e2837cb50f7e294c09c0a00f4af48a3c28"
+      "0e94487961b4854ea1561ed50036c7e2837cb50f7e294c09c0a00f4af48a3c28",
+      "2f9ec9664fa7f5c63a378a33ff21bd535d87d3987f10e4b783b151c703402e8b"
     ],
     "aldc.yaml": [
+      "0ea86e88b5039c7a386b6788f4aff1889c7e35c6d6a41633ba54486d5013a68d",
       "c6f45b0448343c67aeac157ad391c41c0240ca102a6603182a88f302bf168936"
     ],
+    "tools/aldc-validate/index.js": [
+      "21a345bedfeb80ac365d3665ae18e615d12e099348c95902306296d061030c76"
+    ],
+    "tools/aldc-validate/package.json": [
+      "a5446551001b8d5738441e4781a960e85770e9f708a3ac9fd97e1e5da61e806e"
+    ],
+    "tools/bcquality/config.js": [
+      "521191d9fc36a161c84a3ff6d3b2f152255c995bb6e1a41b87e03d7cde057a4a"
+    ],
+    "tools/bcquality/index-state.js": [
+      "ee32b1a8bd7a8a3e08de2a607265954636acebbcc99686c771b883f9c08b9d28"
+    ],
     "tools/bcquality/install.ps1": [
+      "8fbdd9b80b235400bfabd4e58db9ed9e2019ad323f715de48bf6e0bd78490dd2",
       "c2cae01033bc2102d05e310c635408397ca5255ac8a700c6fcd74dcf1351871b"
     ],
     "tools/bcquality/install.sh": [
+      "55c842e4a7aec2dd5da065211bfa061f4e8c12e1504fcaace362269b45663374",
       "74193b0616b7ae3f8c62ebe8312ddbfd9aea5f1b9423fd77ccd4178acf35d3cf"
     ],
+    "tools/bcquality/precondition_hook.ps1": [
+      "0e72ff91e78798452ee3f414a844c11e614aae4f44d79521ce40a33e57ab7640"
+    ],
+    "tools/bcquality/precondition_hook.sh": [
+      "36bac27b78826fa731c4bf25d27c81ac58f18f1c3d5a3b8ca7eaa28d903ccfae"
+    ],
     "tools/bcquality/README.md": [
-      "b8e621a470f8775dedc5da68cdb913b4fa99adff22c3589b8becccbea1b3cdeb"
+      "b8e621a470f8775dedc5da68cdb913b4fa99adff22c3589b8becccbea1b3cdeb",
+      "c36a0ea38d40225168e3b556b619acd51abe941cafdf4dc4451726969021b9d8"
     ],
     "tools/bcquality/validate_evidence.py": [
+      "10c02f21042b30b8ad7b24a6f38005e64baadcd1a1020472768dc7f7dddaaff7",
       "583e71dcfd5a714b64481d8b96a6e14260acb28d9823c0b892a294f267648000"
     ]
   }

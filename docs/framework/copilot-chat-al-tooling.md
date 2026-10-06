@@ -189,3 +189,18 @@ input commits, recorded provenance and host acceptance. Do not bypass that gate.
 - [Official AL MCP](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/al-agent-tools/al-mcp-server)
 - [Profiling MCP](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/scheduled-performance-profiler-overview#profiling-with-an-ai-agent-mcp-server)
 - [Snapshot MCP](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-snapshot-debugging#snapshot-debugging-with-an-ai-agent-mcp-server)
+
+## Chat model selection and updates
+
+Base agent templates and prompts with an explicit model use
+`Claude Sonnet 5.5 (copilot)`. Both Chat installation profiles retain that
+selection; prompts without a model inherit the selected agent. Terminal adapters
+keep their separately validated model IDs.
+
+Install updates unchanged managed files. Without a receipt, the known-installation
+manifest recognises unmodified 4.2.0 and 5.0.0 source installations; published VSIX
+hashes are added by the extension's artifact manifest. Locally modified or unknown
+files are preserved as collisions, so a completed install alone does not prove
+every agent was updated. Review the install report and the actual `.github/agents`
+frontmatter. Resolve each collision while preserving the intended local changes;
+use a reviewed force update only when replacing the files is intended.

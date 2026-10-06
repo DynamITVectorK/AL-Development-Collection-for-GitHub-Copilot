@@ -3,7 +3,8 @@
  * Generate the Copilot CLI distribution directly from the canonical source trees.
  * Never edit copilot-cli-plugin/ directly. --check detects drift, including orphans.
  * Workflow bodies are retained in full; only host vocabulary and initialization
- * are translated. Copilot model selection remains sourced from root agents/.
+ * are translated. Model IDs belong to this host adapter; Chat model refreshes
+ * do not implicitly change the validated CLI selection.
  */
 const fs = require('fs');
 const path = require('path');
@@ -76,8 +77,12 @@ function expected(root = ROOT) {
     const name = path.basename(file, '.agent.md');
     const canonical = split(read(`agents/${name}.agent.md`));
     const src = canonical;
-    // Translate the existing Copilot model identifier, never infer it from AL18.
-    const models = { 'Claude Sonnet 4.6 (copilot)': 'claude-sonnet-4.6' };
+    // Keep the validated CLI model during this Chat-only template refresh.
+    // A CLI model upgrade requires its own catalog/host validation.
+    const models = {
+      'Claude Sonnet 4.6 (copilot)': 'claude-sonnet-4.6',
+      'Claude Sonnet 5.5 (copilot)': 'claude-sonnet-4.6',
+    };
     const model = models[canonical.data.model];
     if (!model) throw new Error(`Unmapped Copilot model: ${canonical.data.model}`);
     const data = { name, description: bodyFor(oneLine(src.data.description)), tools: toolsForRole(name), model };

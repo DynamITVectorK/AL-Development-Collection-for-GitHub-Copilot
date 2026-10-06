@@ -27,7 +27,7 @@ const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const OUTPUT = path.join(ROOT, 'known-installations.json');
-const DEFAULT_TAGS = ['v4.2.0'];
+const DEFAULT_TAGS = ['v4.2.0', 'v5.0.0'];
 const IGNORED = new Set(['.aldc-install', '.git']);
 
 const sha256 = buffer => crypto.createHash('sha256').update(buffer).digest('hex');
