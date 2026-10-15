@@ -7,13 +7,17 @@ const fs = require('fs');
 const path = require('path');
 const SEARCH = ['al_symbolsearch', 'al_getdiagnostics'];
 const BUILD = [...SEARCH, 'al_downloadsymbols', 'al_build'];
+const IMPLEMENT = [...BUILD, 'al_getnextobjectid'];
 const DEBUG = ['al_debug', 'al_setbreakpoint', 'al_snapshotdebugging'];
+// Chat selectors use toolReferenceName, not necessarily the registration name.
+// Confirmed from the installed AL18.1 manifest and the native host smoke.
+const referenceNames = { al_getdiagnostics: 'al_get_diagnostics' };
 const roles = {
   'al-spec-agent': [SEARCH, 'Own specification contracts and ordinary technical research. Preserve approved architecture and human approval; write only the assigned spec and its declared BCQuality selection/criteria sidecars. Knowledge consultation follows the design guidance. No builds, tests, dependency changes or code review.'],
   'al-architect': [SEARCH, 'Resolve architectural viability and dependencies; consume graph evidence. Delegate exact implementation declarations.'],
   'al-planning-subagent': [SEARCH, 'Resolve material planning gaps and reuse approved evidence; do not reopen settled design decisions.'],
-  'al-developer': [[...BUILD, ...DEBUG], 'Own scoped implementation, dependency setup, builds, tests and optional graph operations through your existing terminal.'],
-  'al-implement-subagent': [BUILD, 'Own scoped TDD implementation, dependency setup, builds and optional graph operations through your existing terminal.'],
+  'al-developer': [[...IMPLEMENT, ...DEBUG], 'Own scoped implementation, dependency setup, builds, tests and optional graph operations through your existing terminal.'],
+  'al-implement-subagent': [IMPLEMENT, 'Own scoped TDD implementation, dependency setup, builds and optional graph operations through your existing terminal.'],
   'al-developer-reviewer': [SEARCH, 'Independent direct-increment review. Read current sources and supplied build/test evidence; do not build, execute tests or modify code.'],
   'al-review-subagent': [SEARCH, 'Read sources and actual implementation evidence. Diagnostics, fresh builds and runtime tests are different claims. Do not execute builds, tests, debugging or graph extraction.'],
   'dredd': [SEARCH, 'Remain independent: choose the audit question, inspect raw evidence and source yourself, and request a bounded graph operation from an implementation owner when needed.'],
@@ -47,7 +51,7 @@ function project(relative, input) {
     !/ms-dynamics-smb\.al\/|al-symbols-mcp\/|sshadowsdk\.al-lsp-for-agents\/|bc[-_]?atlas/i.test(s));
   if (!tools.some(t => t === 'read' || t === 'read/readFile')) tools.push('read/readFile');
   if (role === 'al-spec.create' && !tools.includes('edit/createFile')) tools.push('edit/createFile');
-  tools.push(...grant.map(t => `ms-dynamics-smb.al/${t}`));
+  tools.push(...grant.map(t => `ms-dynamics-smb.al/${referenceNames[t] || t}`));
   front = front.replace(toolLine[0], `tools: [${[...new Set(tools)].join(', ')}]`);
   body = body.split('al_get_diagnostics').join('al_getdiagnostics');
   if (role === 'al-developer') {

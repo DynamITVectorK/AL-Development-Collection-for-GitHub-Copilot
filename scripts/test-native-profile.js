@@ -129,8 +129,13 @@ try {
   check(run.status === 0, `Native install: ${run.stderr}`);
   check(read(path.join(fixture, 'app.json')) === sentinel, 'User manifest untouched');
   check(JSON.parse(read(path.join(fixture, '.github/aldc-profile.json'))).profile === 'bc29-native', 'Native profile recorded');
+  for (const contract of ['native-al-tools', 'copilot-chat-al-tooling']) {
+    const installedContract = path.join(fixture, '.github/docs/framework', contract + '.md');
+    const smokeLink = read(installedContract).match(/\[[^\]]*smoke test\]\(([^)]+)\)/);
+    check(smokeLink && fs.existsSync(path.resolve(path.dirname(installedContract), smokeLink[1])), `Smoke is reachable from installed ${contract}`);
+  }
 
-  const allowed = new Set(['al_symbolsearch', 'al_getdiagnostics', 'al_build', 'al_downloadsymbols', 'al_debug', 'al_setbreakpoint', 'al_snapshotdebugging']);
+  const allowed = new Set(['al_symbolsearch', 'al_get_diagnostics', 'al_getnextobjectid', 'al_build', 'al_downloadsymbols', 'al_debug', 'al_setbreakpoint', 'al_snapshotdebugging']);
   for (const tree of ['agents', 'prompts']) {
     for (const name of fs.readdirSync(path.join(root, tree)).filter(n => /\.(agent|prompt)\.md$/.test(n))) {
       const installed = path.join(fixture, '.github', tree, name);
@@ -140,7 +145,8 @@ try {
       assert.deepEqual(metadata.handoffs, original.handoffs); checks++;
       check(!metadata.tools.some(t => /al-symbols-mcp|atlas/i.test(t)), `No obsolete provider grant: ${name}`);
       check(metadata.tools.filter(t => t.startsWith('ms-dynamics-smb.al/')).every(t => allowed.has(t.split('/')[1])), `Catalog names: ${name}`);
-      check(!/al_symbolrelations|al_get_diagnostics|al_search_objects|al_download_symbols|al_generate_manifest|al_download_source|al_clear_credentials_cache|al_generate_cpu_profile|al_get_package_dependencies|al_generatepermissionset|al_new_project|\bal_go\b/.test(text), `No stale tool instructions: ${name}`);
+      check(!metadata.tools.includes('ms-dynamics-smb.al/al_getdiagnostics'), `Diagnostics uses the actual picker reference: ${name}`);
+      check(!/al_symbolrelations|al_search_objects|al_download_symbols|al_generate_manifest|al_download_source|al_clear_credentials_cache|al_generate_cpu_profile|al_get_package_dependencies|al_generatepermissionset|al_new_project|\bal_go\b/.test(text), `No stale tool instructions: ${name}`);
       const link = text.match(/\[the Chat tool contract\]\(([^)]+)\)/);
       check(link && fs.existsSync(path.resolve(path.dirname(installed), link[1])), `Contract readable after install: ${name}`);
     }
@@ -150,10 +156,17 @@ try {
   check(grants('al-conductor').length === 0, 'Conductor has no native execution grants');
   const conductor = read(path.join(root, 'agents/al-conductor.agent.md'));
   check(agent('al-conductor').endsWith(conductor.slice(conductor.indexOf('\n---', 3) + 4)), 'Entire Conductor body retained inline');
-  for (const name of ['al-architect', 'al-planning-subagent', 'al-review-subagent', 'al-developer-reviewer', 'dredd', 'al-presales', 'al-agent-builder']) {
-    check(!grants(name).some(t => /al_build|al_downloadsymbols|al_debug|al_setbreakpoint|al_snapshotdebugging/.test(t)), `Read-only native scope: ${name}`);
+  for (const name of ['al-architect', 'al-spec-agent', 'al-planning-subagent', 'al-review-subagent', 'al-developer-reviewer', 'dredd', 'al-presales', 'al-agent-builder']) {
+    check(!grants(name).some(t => /al_getnextobjectid|al_build|al_downloadsymbols|al_debug|al_setbreakpoint|al_snapshotdebugging/.test(t)), `Read-only native scope: ${name}`);
   }
-  for (const name of ['al-developer', 'al-implement-subagent']) check(grants(name).includes('ms-dynamics-smb.al/al_build'), `Implementation build grant: ${name}`);
+  for (const name of ['al-developer', 'al-implement-subagent']) {
+    check(grants(name).includes('ms-dynamics-smb.al/al_build'), `Implementation build grant: ${name}`);
+    check(grants(name).includes('ms-dynamics-smb.al/al_getnextobjectid'), `Implementation allocation grant: ${name}`);
+  }
+  for (const name of ['al-build', 'al-spec.create', 'al-initialize']) {
+    const tools = fm(read(path.join(fixture, '.github/prompts', name + '.prompt.md'))).tools;
+    check(!tools.includes('ms-dynamics-smb.al/al_getnextobjectid'), `Prompt cannot expand allocation scope: ${name}`);
+  }
   check(!grants('al-triage').includes('ms-dynamics-smb.al/al_build'), 'Triage cannot build through native grant');
   const build = read(path.join(fixture, '.github/prompts/al-build.prompt.md'));
   check(!/al_(?:incremental_publish|publish|publish_existing_extension|package|full_package)/.test(build), 'Native build has no deployment or invented packaging operations');
