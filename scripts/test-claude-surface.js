@@ -37,6 +37,22 @@ test('session-context: warns when rules are missing and stays silent outside AL 
   assert.strictEqual(run('session-context.js', { cwd: fs.mkdtempSync(path.join(os.tmpdir(), 'no-al-')) }), null);
 });
 
+test('session-context: without the BCQuality plugin it warns with both install commands and has Claude offer the install', () => {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'aldc-home-'));
+  fs.mkdirSync(path.join(home, '.claude', 'plugins'), { recursive: true });
+  const installed = path.join(home, '.claude', 'plugins', 'installed_plugins.json');
+  const env = { HOME: home, USERPROFILE: home, BCQUALITY_HOME: '' };
+  fs.writeFileSync(installed, JSON.stringify({ plugins: { 'aldc@aldc-marketplace': [{}] } }));
+  const out = run('session-context.js', { cwd: project(), session_id: sid() }, env);
+  assert.match(out.systemMessage, /BCQuality plugin is not installed/);
+  assert.match(out.systemMessage, /claude plugin marketplace add https:\/\/github\.com\/microsoft\/BCQuality\.git, then claude plugin install bcquality@bcquality/);
+  assert.match(out.hookSpecificOutput.additionalContext, /offer to install it/);
+  assert.match(out.hookSpecificOutput.additionalContext, /Run them only if the user agrees/);
+  fs.writeFileSync(installed, JSON.stringify({ plugins: { 'bcquality@bcquality': [{}] } }));
+  const ok = run('session-context.js', { cwd: project(), session_id: sid() }, env);
+  assert.doesNotMatch(ok.hookSpecificOutput.additionalContext, /BCQuality (plugin )?is not installed/);
+});
+
 test('agent-brief: ALDC subagent in the foreground, with every rule and the autonomy mode', () => {
   const out = run('agent-brief.js', { cwd: project(), tool_input: { subagent_type: 'aldc:al-implement-subagent', prompt: 'Phase 2', run_in_background: true } }, { ALDC_GATES: 'pre-approved' });
   const u = out.hookSpecificOutput.updatedInput;
@@ -62,6 +78,38 @@ test('agent-brief: adds the agent SDK rule when the project extends Agent Metada
   fs.writeFileSync(path.join(cwd, 'app', 'src', 'A.EnumExt.al'), 'enumextension 50101 "A" extends "Agent Metadata Provider" { }');
   const p = run('agent-brief.js', { cwd, tool_input: { subagent_type: 'aldc:al-review-subagent', prompt: 'x' } }).hookSpecificOutput.updatedInput.prompt;
   assert.match(p, /Completeness checklist/);
+});
+
+test('agent-brief: Architect, Spec and planning receive BCQuality articles to consult and cite', () => {
+  const cwd = project();
+  const bcq = fs.mkdtempSync(path.join(os.tmpdir(), 'aldc-bcq-'));
+  fs.mkdirSync(path.join(bcq, 'community', 'knowledge', 'perf'), { recursive: true });
+  fs.writeFileSync(path.join(bcq, 'community', 'knowledge', 'perf', 'modify.md'), '---\ndomain: performance\nkeywords: [contact-modify, record-modify, lead-score]\n---\n# Avoid redundant Modify\n');
+  const env = { BCQUALITY_HOME: bcq };
+  for (const role of ['aldc:al-architect', 'aldc:al-spec-agent', 'aldc:al-planning-subagent']) {
+    const p = run('agent-brief.js', { cwd, tool_input: { subagent_type: role, prompt: 'Lead Score on Contact' } }, env).hookSpecificOutput.updatedInput.prompt;
+    assert.match(p, /## BCQuality knowledge/, role);
+    assert.match(p, /community\/knowledge\/perf\/modify\.md/, role);
+    assert.match(p, /BCQuality references/, role);
+    const again = run('agent-brief.js', { cwd, tool_input: { subagent_type: role, prompt: p } }, env).hookSpecificOutput.updatedInput.prompt;
+    assert.strictEqual((again.match(/## BCQuality knowledge/g) || []).length, 1, role);
+  }
+  const dev = run('agent-brief.js', { cwd, tool_input: { subagent_type: 'aldc:al-implement-subagent', prompt: 'Lead Score' } }, env).hookSpecificOutput.updatedInput.prompt;
+  assert.doesNotMatch(dev, /## BCQuality knowledge/);
+});
+
+test('agent-brief: external.bcquality.enabled false means no BCQuality articles for any role', () => {
+  const cwd = project();
+  fs.writeFileSync(path.join(cwd, 'aldc.yaml'), 'external:\n  bcquality:\n    mode: "plugin"\n    enabled: false   # opt-out\n');
+  const bcq = fs.mkdtempSync(path.join(os.tmpdir(), 'aldc-bcq-'));
+  fs.mkdirSync(path.join(bcq, 'community', 'knowledge', 'perf'), { recursive: true });
+  fs.writeFileSync(path.join(bcq, 'community', 'knowledge', 'perf', 'modify.md'), '---\ndomain: performance\nkeywords: [contact-modify, record-modify, lead-score]\n---\n# Avoid redundant Modify\n');
+  const env = { BCQUALITY_HOME: bcq };
+  for (const role of ['aldc:al-architect', 'aldc:al-spec-agent', 'aldc:al-planning-subagent', 'aldc:al-review-subagent']) {
+    const p = run('agent-brief.js', { cwd, tool_input: { subagent_type: role, prompt: 'Lead Score on Contact' } }, env).hookSpecificOutput.updatedInput.prompt;
+    assert.doesNotMatch(p, /## BCQuality (knowledge|selection)/, role);
+    assert.doesNotMatch(p, /modify\.md/, role);
+  }
 });
 
 test('stop-guard: in pre-approved blocks an unfinished plan at most 3 times and honours blocked.md', () => {
