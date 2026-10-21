@@ -59,9 +59,41 @@
   executed on a BC sandbox (20/20 passed) and a 6-phase, 2-hour run with no process
   cuts.
 
+## [5.0.4] - 2026-10-15
+
+### Changed — Copilot Chat
+
+- Grant AL18 native object-ID lookup only to `bc29-native` Developer and
+  Implementation Subagent, within approved project ranges. Keep collision
+  handling and the tool's no-reservation and local-scan limitations explicit.
+- Select native diagnostics through AL18.1's `al_get_diagnostics` Chat reference;
+  retain MCP's distinct `al_getdiagnostics` operation and schema.
+- Bound Architect/Spec symbol and dependency research to the selected project;
+  preserve independent Spec, BCQuality consultation, approved contracts and gates.
+- Scope Chat Triage's snapshot capabilities to initialize/status/stop.
+  Conductor retains its coordination role.
+- Resolve the libraries used by the project from its approved dependencies and
+  declared versions in both Chat profiles.
+- Explain project selection in Insiders, compilation and diagnostics, with
+  permissions adjusted to each agent's responsibilities.
+
+### Availability
+
+The VS Code extension was published to
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=javierarmestogonzalez.al-development-collection)
+on **20 October 2026**, from the [`release/5.0.x`](https://github.com/javiarmesto/ALDC-AL-Development-Collection/tree/release/5.0.x)
+maintenance line. Update the extension, then use **AL Collection: Update Toolkit**
+to incorporate the new guidance into an existing project. Review the proposed
+changes, use **AL Collection: Verify Installed Toolkit** and reload the window.
+
+Graph, LSP, profiling and snapshot operations are optional capabilities whose
+availability depends on the host and installed providers. Marketplace, GitHub
+releases and npm are separate distribution channels. Claude Code remains linked
+to ALDC with its own maintained 5.1.x surface evolution, documented above.
+
 ## [5.0.3] - 2026-10-07
 
-### Fixed
+### Improvements
 
 - Advance the package, canonical plugin, generated distributions and root
   marketplace catalogs to 5.0.3 so installed plugins can detect this update.
@@ -75,19 +107,13 @@
   and criteria sidecars are explicit in its documentation-only write scope.
 - Regenerate the VS Code Foundation, Copilot CLI, Claude Code/plugin workspace
   and Codex distributions from the shared contracts without widening tool grants.
-- Normalize Windows line endings before rewriting generated surface configuration,
-  so Codex keeps its declared plans/audit roots when regenerated on Windows.
-- Make global test fixtures portable on Windows: discover a working Python,
-  exercise the PowerShell installer, escape YAML paths, use directory junctions
-  for link-protection checks and normalize CRLF before creating CRLF fixtures.
-  Codex tests read UTF-8 explicitly; surface-isolation tests use npm's JS entrypoint.
-  Doctor fixtures use platform paths and a Windows case alias; the genuine
-  symlink traversal check runs in Linux CI when Windows lacks symlink privileges.
+- Improve Windows compatibility when generating host configuration, preserving
+  each surface's declared plans and audit paths.
 
 The GitHub release includes the toolkit npm archive for local installation.
 Publication to the npm registry and VS Code Marketplace is separate. Existing
-project copies still require a reviewed toolkit update. The customer host cookbook
-remains a live acceptance test, not a result claimed by the packaging checks.
+project copies still require a reviewed toolkit update. Follow the installation
+guide for the selected host.
 
 ## [5.0.2] - 2026-10-06
 
